@@ -1,18 +1,17 @@
 package com.example.trekieapp
 
-
 import com.google.gson.annotations.SerializedName
 
-data class Users(
+data class Episode(
 /*    @SerializedName("count")
     var count: Int?,*/
     @SerializedName("episodes")
-    var items: List<Item?>?
+    var episodes: List<Episodes?>?
 ) {
-    data class Item(
+    data class Episodes(
         @SerializedName("uid")
-        var firstName: String?,
+        var uid: String?,
         @SerializedName("title")
-        var lastName: String?
+        var title: String?
     )
 }
