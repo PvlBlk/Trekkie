@@ -13,34 +13,15 @@ import retrofit2.Response
 
 class ActivityViewModel : BaseViewModel() {
 
-    val simpleLiveData = MutableLiveData<Call<Episode>>()
     var universalLiveData = MutableLiveData<Response<JsonElement>>()
 
-    fun getUsers  (text : String, applicationContext : Context) : Response<Episode>? {
-        var response1 : Response<Episode>? = null
-        var api = NetworkService.retrofitService()
-        var call = api.getEpisodes(text)
-        call.enqueue(object : Callback<Episode> {
-            override fun onResponse(call: Call<Episode>, response: Response<Episode>) {
-                Log.d("MainActivity::","onResponse:" + response.body())
-                Toast.makeText(applicationContext, "" + response.body(), Toast.LENGTH_LONG).show()
-                response1 = response
-            }
-            override fun onFailure(call: Call<Episode>, t: Throwable) {
-                Log.d("MainActivity::","onFailure:")
-            }
-        })
-        return  response1
+    suspend fun getEpisodesWithLiveData(text : String) {
+        loadEpisodes(text = text)
     }
 
-    suspend fun getUsersWithLiveData(text : String) {
-        loadUsers(text = text)
+    suspend fun loadEpisodes(text: String){
 
-    }
-
-    suspend fun loadUsers(text: String){
-
-        var result = api.getUsers(text)
+        var result = api.getEpisodes(text)
         universalLiveData.postValue(result)
         Log.d("result::", "" + result.body().toString())
     }

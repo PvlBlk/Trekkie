@@ -11,12 +11,7 @@ import retrofit2.http.Query
 interface Api {
 
     @POST("episode/search")
-    fun getEpisodes(
-        @Query("title") page: String
-    ): Call<Episode>
-
-    @POST("episode/search")
-    suspend fun getUsers(
+    suspend fun getEpisodes(
         @Query("title") page: String
     ): Response<JsonElement>
 

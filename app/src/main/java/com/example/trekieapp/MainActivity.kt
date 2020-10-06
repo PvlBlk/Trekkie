@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private fun buttonOneClickListener() {
         button_second.setOnClickListener {
             lifecycleScope.launch {
-                activityViewModel.getUsersWithLiveData(edit_query.text.toString())
+                activityViewModel.getEpisodesWithLiveData(edit_query.text.toString())
             }
         }
     }
