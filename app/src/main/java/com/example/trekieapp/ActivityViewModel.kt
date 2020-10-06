@@ -14,6 +14,7 @@ import retrofit2.Response
 class ActivityViewModel : BaseViewModel() {
 
     val simpleLiveData = MutableLiveData<Call<Episode>>()
+    var universalLiveData = MutableLiveData<Response<JsonElement>>()
 
     fun getUsers  (text : String, applicationContext : Context) : Response<Episode>? {
         var response1 : Response<Episode>? = null
@@ -32,5 +33,16 @@ class ActivityViewModel : BaseViewModel() {
         return  response1
     }
 
+    suspend fun getUsersWithLiveData(text : String) {
+        loadUsers(text = text)
+
+    }
+
+    suspend fun loadUsers(text: String){
+
+        var result = api.getUsers(text)
+        universalLiveData.postValue(result)
+        Log.d("result::", "" + result.body().toString())
+    }
 
 }
