@@ -1,4 +1,4 @@
-package com.example.trekieapp
+package com.example.trekieapp.network
 
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Companion.invoke
@@ -11,7 +11,6 @@ object NetworkService {
 
     private const val BASE_URL = " http://stapi.co/api/v1/rest/"
 
-    // HttpLoggingInterceptor выводит подробности сетевого запроса в логи
     private val loggingInterceptor = run {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.apply {

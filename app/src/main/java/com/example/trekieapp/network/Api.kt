@@ -1,0 +1,23 @@
+package com.example.trekieapp.network
+
+import com.example.trekieapp.Episode
+import com.google.gson.JsonElement
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Query
+
+interface Api {
+
+    @POST("episode/search")
+    fun getEpisodes(
+        @Query("title") page: String
+    ): Call<Episode>
+
+    @POST("episode/search")
+    suspend fun getUsers(
+        @Query("title") page: String
+    ): Response<JsonElement>
+
+}

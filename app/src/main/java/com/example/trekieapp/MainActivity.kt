@@ -8,10 +8,14 @@ import android.widget.Toast
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.JsonElement
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.button_second
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_second.*
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,69 +27,27 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
         activityViewModel = ViewModelProviders.of(this).get(ActivityViewModel::class.java)
-        observeGetPosts()
-
+        setContentView(R.layout.activity_main)
         buttonOneClickListener()
-        buttonTwoClickListener()
+        observeGetPosts()
     }
-
-    // Наблюдаем за нашей лайвдатой
-    // В зависимости от Ивента устанавливаем нужное состояние вью
     private fun observeGetPosts() {
-        activityViewModel.simpleLiveData.observe(this, Observer {
-            viewOneSuccess(it.data)
-            when (it.status) {
-                Status.LOADING -> viewOneLoading()
-                Status.SUCCESS -> viewOneSuccess(it.data)
-                Status.ERROR -> viewOneError(it.error)
-            }
+        activityViewModel.universalLiveData.observe(this, Observer {
+            var text : String? = it.body().toString()
+            textView_first.text = text
         })
     }
-
-
     private fun buttonOneClickListener() {
-        button_first.setOnClickListener {
-            // activityViewModel.getUsers(page = "Best of both" )
-            var response : Response<Users>? = activityViewModel.getUsers(text = edit_query.text.toString(), applicationContext = applicationContext)
-        }
-    }
-
-    // Здесь так же наблюдаем за Ивентом, используя колбек
-    private fun buttonTwoClickListener() {
         button_second.setOnClickListener {
-            activityViewModel.getUsersError(page = 2) {
-                when (it.status) {
-                    Status.LOADING -> viewTwoLoading()
-                    Status.SUCCESS -> viewTwoSuccess(it.data)
-                    Status.ERROR -> viewTwoError(it.error)
-                }
+            lifecycleScope.launch {
+                activityViewModel.getUsersWithLiveData(edit_query.text.toString())
             }
         }
     }
-
-    private fun viewOneLoading() {
-        // Пошла загрузка, меняем состояние вьюх
-    }
-
-    private fun viewOneSuccess(data: Users?) {
-        val usersList: MutableList<Users.Item>? = data?.items as MutableList<Users.Item>?
-        usersList?.shuffle()
-        Toast.makeText(applicationContext, "" + usersList.toString(), Toast.LENGTH_SHORT).show()
-        usersList?.let {
-            Toast.makeText(applicationContext, "${it}", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun viewOneError(error: Error?) {
-        // Показываем ошибку
-    }
-
     private fun viewTwoLoading() {}
 
-    private fun viewTwoSuccess(data: Users?) {}
+    private fun viewTwoSuccess() {}
 
     private fun viewTwoError(error: Error?) {
         error?.let {
