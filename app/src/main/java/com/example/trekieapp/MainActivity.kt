@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -33,9 +34,11 @@ class MainActivity : AppCompatActivity()  {
         observeGetPosts()
     }
     private fun observeGetPosts() {
-        activityViewModel.universalLiveData.observe(this, Observer {
-            var text : String? = it.body().toString()
-            Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+        activityViewModel.episodesLiveData.observe(this, Observer {
+            var newList : List<String>
+            it.forEach {
+                Toast.makeText(this, it.title, LENGTH_SHORT).show()
+            }
         })
     }
     private fun buttonOneClickListener() {

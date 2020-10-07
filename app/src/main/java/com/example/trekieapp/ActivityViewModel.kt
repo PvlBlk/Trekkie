@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.example.trekieapp.model.Episode
 import com.example.trekieapp.network.NetworkService
 import com.example.trekieapp.utils.Utils
 import com.google.gson.JsonElement
@@ -15,7 +16,7 @@ import retrofit2.Response
 
 class ActivityViewModel : BaseViewModel() {
 
-    var universalLiveData = MutableLiveData<Response<JsonElement>>()
+    var episodesLiveData = MutableLiveData<List<Episode>>()
 
     suspend fun getEpisodesWithLiveData(text : String) {
         loadEpisodes(text = text)
@@ -24,8 +25,9 @@ class ActivityViewModel : BaseViewModel() {
     suspend fun loadEpisodes(text: String){
 
         var result = api.getEpisodes(text)
-        universalLiveData.postValue(result)
-        //Log.d("result::", "" + Utils.parseEpisodeJson(response = result.body())) todo
+        var list = Utils.parseEpisodeJson(response = result.body())
+        episodesLiveData.postValue(list)
+        Log.d("result::", "" + Utils.parseEpisodeJson(response = result.body()))
     }
 
 }
