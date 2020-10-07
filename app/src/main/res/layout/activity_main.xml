@@ -22,10 +22,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <TextView
-        android:layout_width="300dp"
-        android:id="@+id/textView_first"
-        android:layout_height="244dp"
+<!--    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="317dp"
+        android:layout_height="101dp"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center"></TextView>
 
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_first" />
+        app:layout_constraintTop_toBottomOf="@+id/button_first" />-->
 
     <include
         android:id="@+id/include"
@@ -47,12 +47,6 @@
         app:layout_anchor="@+id/button_first"
         app:layout_anchorGravity="center" />
 
-    <fragment
-        android:id="@+id/details_fragment"
-        class="com.example.trekieapp.FirstFragment"
-        android:layout_width="match_parent"
-        android:layout_height="358dp"
-        app:layout_anchor="@+id/textView_first"
-        app:layout_anchorGravity="center" /> <!-- todo
--->
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

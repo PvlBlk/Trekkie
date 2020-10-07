@@ -7,8 +7,9 @@
     tools:context=".FirstFragment">
 
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
+        android:layout_width="413dp"
+        android:layout_height="547dp"
+        android:id="@+id/list"
         android:contextClickable="true"
         android:dividerHeight="0dp"
         android:listSelector="@color/colorAccent"
@@ -17,6 +18,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.285"></ListView>
+        app:layout_constraintVertical_bias="0.0" />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

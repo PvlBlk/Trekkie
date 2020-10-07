@@ -12,8 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.JsonElement
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.button_second
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -21,10 +21,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()  {
 
     private lateinit var activityViewModel: ActivityViewModel
-
+    lateinit var fragment: FirstFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityViewModel = ViewModelProviders.of(this).get(ActivityViewModel::class.java)
@@ -35,13 +35,13 @@ class MainActivity : AppCompatActivity() {
     private fun observeGetPosts() {
         activityViewModel.universalLiveData.observe(this, Observer {
             var text : String? = it.body().toString()
-            textView_first.text = text
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
         })
     }
     private fun buttonOneClickListener() {
-        button_second.setOnClickListener {
+        searchBtn.setOnClickListener {
             lifecycleScope.launch {
-                activityViewModel.getEpisodesWithLiveData(edit_query.text.toString())
+              activityViewModel.getEpisodesWithLiveData(searchField.text.toString())
             }
         }
     }
