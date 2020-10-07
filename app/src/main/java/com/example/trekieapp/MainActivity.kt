@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity()  {
         activityViewModel.episodesLiveData.observe(this, Observer {
             var newList : List<String>
             it.forEach {
-                Toast.makeText(this, it.title, LENGTH_SHORT).show()
+                Toast.makeText(this, it.title, LENGTH_SHORT).show() //todo
             }
         })
     }
