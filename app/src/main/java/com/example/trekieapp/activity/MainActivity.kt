@@ -1,8 +1,6 @@
-package com.example.trekieapp
+package com.example.trekieapp.activity
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
@@ -10,16 +8,12 @@ import android.widget.Toast.LENGTH_SHORT
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.JsonElement
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.trekieapp.Error
+import com.example.trekieapp.fragment.FirstFragment
+import com.example.trekieapp.R
+import com.example.trekieapp.viewmodel.ActivityViewModel
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity()  {
@@ -34,10 +28,10 @@ class MainActivity : AppCompatActivity()  {
         observeGetPosts()
     }
     private fun observeGetPosts() {
-        activityViewModel.episodesLiveData.observe(this, Observer {
+        activityViewModel.episodeSummaryLiveData.observe(this, Observer {
             var newList : List<String>
             it.forEach {
-                Toast.makeText(this, it.title, LENGTH_SHORT).show() //todo
+              Toast.makeText(this, it.air_date, LENGTH_SHORT).show()
             }
         })
     }

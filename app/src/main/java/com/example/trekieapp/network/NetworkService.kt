@@ -9,7 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkService {
 
-    private const val BASE_URL = " http://stapi.co/api/v1/rest/"
+    private const val STAPI_BASE_URL = " http://stapi.co/api/v1/rest/"
+    private const val MOVIE_API_BASE_URL = " https://api.themoviedb.org/"
 
     private val loggingInterceptor = run {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -40,12 +41,21 @@ object NetworkService {
         .addInterceptor(baseInterceptor)
         .build()
 
-    fun retrofitService(): Api {
+    fun stapiRetrofitService(): Stapi {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(STAPI_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
-            .create(Api::class.java)
+            .create(Stapi::class.java)
+    }
+
+    fun movieRetrofitService(): MovieApi {
+        return Retrofit.Builder()
+            .baseUrl(MOVIE_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+            .create(MovieApi::class.java)
     }
 }

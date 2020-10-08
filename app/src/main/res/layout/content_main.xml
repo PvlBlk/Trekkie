@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.example.trekieapp.EpisodeFragment"
+        android:name="com.example.trekieapp.fragment.EpisodeFragment"
         android:layout_width="match_parent"
         android:layout_height="565dp"
         app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment"

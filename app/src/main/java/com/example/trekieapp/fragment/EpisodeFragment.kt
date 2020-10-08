@@ -1,4 +1,4 @@
-package com.example.trekieapp
+package com.example.trekieapp.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.trekieapp.MyEpisodeRecyclerViewAdapter
+import com.example.trekieapp.R
 import com.example.trekieapp.dummy.DummyContent
 
 /**
@@ -38,7 +40,9 @@ class EpisodeFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyEpisodeRecyclerViewAdapter(DummyContent.ITEMS)
+                adapter = MyEpisodeRecyclerViewAdapter(
+                    DummyContent.ITEMS
+                )
             }
         }
         return view
