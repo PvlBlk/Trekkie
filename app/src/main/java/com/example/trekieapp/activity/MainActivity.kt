@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity()  {
         activityViewModel.episodeSummaryLiveData.observe(this, Observer {
             var newList : List<String>
             it.forEach {
-              Toast.makeText(this, it.air_date, LENGTH_SHORT).show()
+              Toast.makeText(this, it.vote_average.toString(), LENGTH_SHORT).show()
             }
         })
     }
