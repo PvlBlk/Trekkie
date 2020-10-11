@@ -15,21 +15,22 @@ class ActivityViewModel : BaseViewModel() {
     }
 
     suspend fun loadEpisodes(text: String){
-
+        summaryList.clear()
         val result = stapi.getEpisodes(text)
+        Log.d("result::", "" +  result.body())
         val list = Utils.parseEpisodeJson(response = result.body())
         list.forEach{
-            loadEpisodesSpecifics(it.seasonNumber, it.episodeNumber)
+            loadEpisodesSpecifics(it.seasonNumber, it.episodeNumber, it.stardateFrom, it.stardateTo)
         }
         episodeSummaryLiveData.postValue(summaryList)
-        //Log.d("result::", "" + Utils.parseEpisodeJson(response = result.body()))
     }
-    suspend fun loadEpisodesSpecifics(seasonNumber: Int, episodeNumber: Int) {
+    suspend fun loadEpisodesSpecifics(seasonNumber: Int, episodeNumber: Int, stardateFrom: Double, stardateTo: Double) {
         val result = movieApi.getEpisodeSpecifics(seasonNumber, episodeNumber)
         val specifics = Utils.parseSpecificJson(result.body())
-        var episodeSummary = EpisodeSummary(specifics.air_date, specifics.name, specifics.overview, specifics.season_number, specifics.episode_number, specifics.vote_average)
+        var episodeSummary = EpisodeSummary(specifics.air_date, specifics.name, specifics.overview, specifics.season_number, specifics.episode_number, specifics.vote_average, stardateFrom, stardateTo)
         summaryList.add(episodeSummary)
         Log.d("result::", "" + episodeSummary.toString())
     }
+
 
 }

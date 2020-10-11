@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
-import com.example.trekieapp.dummy.DummyContent.DummyItem
+import com.example.trekieapp.model.EpisodeSummary
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].
  * TODO: Replace the implementation with code for your data type.
  */
 class MyEpisodeRecyclerViewAdapter(
-    private val values: List<DummyItem>
+    private val values: List<EpisodeSummary>
 ) : RecyclerView.Adapter<MyEpisodeRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,8 +23,8 @@ class MyEpisodeRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.id
-        holder.contentView.text = item.content
+        holder.idView.text = item.air_date
+        holder.contentView.text = item.overview
     }
 
     override fun getItemCount(): Int = values.size

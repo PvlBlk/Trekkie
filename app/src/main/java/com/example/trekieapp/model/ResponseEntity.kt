@@ -2,6 +2,10 @@ package com.example.trekieapp.model
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * This of from Stapi
+ */
+
 data class ResponseEntity(
     val episodes: List<Episode>,
     val page: Page,

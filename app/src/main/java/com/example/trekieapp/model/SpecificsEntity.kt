@@ -1,5 +1,9 @@
 package com.example.trekieapp.model
 
+/**
+ * This of from MovieApi
+ */
+
 data class SpecificsEntity(
     val air_date: String,
     val crew: List<Crew>,
