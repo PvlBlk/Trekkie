@@ -26,18 +26,23 @@ class MyEpisodeRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.idView.text = item.air_date
+       // holder.idView.text = item.air_date
         holder.contentView.text = item.overview
         NetworkService.picasso.load("https://image.tmdb.org/t/p/w500"+item.still_path).into(holder.still)
+        holder.airDate.text = item.air_date
+        holder.rating.text = item.vote_average.toString()
+
+
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val idView: TextView = view.findViewById(R.id.item_number)
+       // val idView: TextView = view.findViewById(R.id.item_number)
         val contentView: TextView = view.findViewById(R.id.content)
         val still: ImageView = view.findViewById(R.id.still)
-
+        val airDate: TextView = view.findViewById(R.id.air_date)
+        val rating: TextView = view.findViewById(R.id.rating)
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }

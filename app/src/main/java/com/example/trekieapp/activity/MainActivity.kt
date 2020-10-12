@@ -23,6 +23,8 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity()  {
 
     private lateinit var activityViewModel: ActivityViewModel
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityViewModel = ViewModelProviders.of(this).get(ActivityViewModel::class.java)
