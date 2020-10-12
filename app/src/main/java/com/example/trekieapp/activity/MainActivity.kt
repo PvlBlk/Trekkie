@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity()  {
     private fun observeGetPosts() {
         activityViewModel.episodeSummaryLiveData.observe(this, Observer {
            fillRecyclerView(it)
-            it.forEach {
+/*            it.forEach {
               Toast.makeText(this, it.vote_average.toString(), LENGTH_SHORT).show()
-            }
+            }*/
         })
     }
     private fun buttonOneClickListener() {
