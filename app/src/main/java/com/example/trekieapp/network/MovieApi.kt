@@ -13,4 +13,5 @@ interface MovieApi {
     suspend fun getEpisodeSpecifics(
         @Path("season_number") season_number: Int, @Path("episode_number") episode_number : Int
     ): Response<JsonElement>
+
 }

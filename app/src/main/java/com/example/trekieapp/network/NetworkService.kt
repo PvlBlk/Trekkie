@@ -1,5 +1,6 @@
 package com.example.trekieapp.network
 
+import com.squareup.picasso.Picasso
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Companion.invoke
 import okhttp3.OkHttpClient
@@ -11,6 +12,7 @@ object NetworkService {
 
     private const val STAPI_BASE_URL = " http://stapi.co/api/v1/rest/"
     private const val MOVIE_API_BASE_URL = " https://api.themoviedb.org/"
+    val picasso = Picasso.get()
 
     private val loggingInterceptor = run {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -58,4 +60,6 @@ object NetworkService {
             .build()
             .create(MovieApi::class.java)
     }
+
+
 }
