@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -22,10 +22,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <TextView
-        android:layout_width="300dp"
-        android:id="@+id/textView_first"
-        android:layout_height="244dp"
+<!--    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="317dp"
+        android:layout_height="101dp"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="center"></TextView>
 
@@ -39,13 +39,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_first" />
+        app:layout_constraintTop_toBottomOf="@+id/button_first" />-->
 
     <include
         android:id="@+id/include"
         layout="@layout/content_main"
         app:layout_anchor="@+id/button_first"
         app:layout_anchorGravity="center" />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
