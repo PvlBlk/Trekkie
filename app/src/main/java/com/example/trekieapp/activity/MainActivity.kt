@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity()  {
         activityViewModel.episodeSummaryLiveData.observe(this, Observer {
            fillRecyclerView(it)
             it.forEach {
-              Toast.makeText(this, it.name, LENGTH_SHORT).show()
+              Toast.makeText(this, it.vote_average.toString(), LENGTH_SHORT).show()
             }
         })
     }
