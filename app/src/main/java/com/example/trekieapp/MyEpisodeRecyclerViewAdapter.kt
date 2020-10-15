@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import com.example.trekieapp.model.EpisodeSummary
 import com.example.trekieapp.network.NetworkService
@@ -26,13 +27,12 @@ class MyEpisodeRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-       // holder.idView.text = item.air_date
+        // holder.idView.text = item.air_date
         holder.contentView.text = item.overview
         NetworkService.picasso.load("https://image.tmdb.org/t/p/w500"+item.still_path).into(holder.still)
         holder.airDate.text = item.air_date
-        holder.rating.text = item.vote_average.toString()
-
-
+        holder.ratingBar.rating = (item.vote_average / 10 * 5 ).toFloat() //todo
+        holder.title.text = item.name
     }
 
     override fun getItemCount(): Int = values.size
@@ -42,7 +42,8 @@ class MyEpisodeRecyclerViewAdapter(
         val contentView: TextView = view.findViewById(R.id.content)
         val still: ImageView = view.findViewById(R.id.still)
         val airDate: TextView = view.findViewById(R.id.air_date)
-        val rating: TextView = view.findViewById(R.id.rating)
+        val ratingBar: RatingBar = view.findViewById(R.id.ratingBar)
+        val title: TextView = view.findViewById(R.id.title)
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }
