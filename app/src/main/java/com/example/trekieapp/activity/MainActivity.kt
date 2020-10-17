@@ -2,6 +2,7 @@ package com.example.trekieapp.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
@@ -30,7 +31,8 @@ class MainActivity : AppCompatActivity()  {
         activityViewModel = ViewModelProviders.of(this).get(ActivityViewModel::class.java)
         setContentView(R.layout.activity_main)
         buttonOneClickListener()
-       observeGetPosts()
+        setSupportActionBar(findViewById(R.id.toolbar))
+        observeGetPosts()
     }
     private fun observeGetPosts() {
         activityViewModel.episodeSummaryLiveData.observe(this, Observer {
@@ -65,7 +67,13 @@ private fun fillRecyclerView(list: List<EpisodeSummary>) {
         }
     }
 
-        private fun viewTwoLoading() {}
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.options_menu, menu)
+
+        return true
+    }
+
+    private fun viewTwoLoading() {} //TODO - Загрузка с прогрессбаром
 
     private fun viewTwoSuccess() {}
 

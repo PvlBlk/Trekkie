@@ -11,7 +11,6 @@ import com.google.gson.JsonObject
 object Utils {
     @JvmStatic
     fun parseEpisodeJson(response : JsonElement?) : List<Episode> {
-        var gson = Gson()
         response as JsonObject?
         val result = Gson().fromJson(response, ResponseEntity::class.java)
         Log.d("Utils::", "" + result.toString())
@@ -19,7 +18,6 @@ object Utils {
     }
     @JvmStatic
     fun parseSpecificJson(response : JsonElement?) : SpecificsEntity {
-        var gson = Gson()
         response as JsonObject?
         val result = Gson().fromJson(response, SpecificsEntity::class.java)
         Log.d("Utils::", "" + result.toString())
