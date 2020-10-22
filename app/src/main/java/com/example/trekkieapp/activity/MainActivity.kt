@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         activityViewModel = ViewModelProviders.of(this).get(ActivityViewModel::class.java)
         setContentView(R.layout.activity_main)
-        buttonOneClickListener()
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -43,13 +42,7 @@ class MainActivity : AppCompatActivity()  {
             }*/
         })
     }
-    private fun buttonOneClickListener() {
-        searchBtn.setOnClickListener {
-/*            lifecycleScope.launch {
-              activityViewModel.getEpisodesWithLiveData(searchField.text.toString())
-            }*/
-        }
-    }
+
 private fun fillRecyclerView(list: List<EpisodeSummary>) {
     Log.d("fill::", "" + list.toString())
     clearRecyclerView()

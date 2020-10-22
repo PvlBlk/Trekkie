@@ -31,7 +31,7 @@ class MyEpisodeRecyclerViewAdapter(
         holder.contentView.text = item.overview
         NetworkService.picasso.load("https://image.tmdb.org/t/p/w500"+item.still_path).into(holder.still)
         holder.airDate.text = item.air_date
-        holder.ratingBar.rating = (item.vote_average / 10 * 5 ).toFloat() //todo
+        holder.ratingBar.rating = (item.vote_average!! / 10 * 5 ).toFloat() //todo
         holder.title.text = item.name
     }
 
