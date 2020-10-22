@@ -1,6 +1,4 @@
-package com.example.trekieapp.model
-
-import java.util.ArrayList
+package com.example.trekkieapp.model
 
 /**
  * Summary of both API's that is used for UI

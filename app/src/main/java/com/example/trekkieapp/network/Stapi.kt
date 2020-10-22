@@ -1,4 +1,4 @@
-package com.example.trekieapp.network
+package com.example.trekkieapp.network
 
 import com.google.gson.JsonElement
 import retrofit2.Response
@@ -9,7 +9,7 @@ interface Stapi {
 
     @POST("episode/search")
     suspend fun getEpisodes(
-        @Query("title") page: String
+        @Query("title") page: String?
     ): Response<JsonElement>
 
 }

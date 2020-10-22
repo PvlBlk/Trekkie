@@ -1,4 +1,4 @@
-package com.example.trekieapp.model
+package com.example.trekkieapp.model
 
 /**
  * This of from MovieApi

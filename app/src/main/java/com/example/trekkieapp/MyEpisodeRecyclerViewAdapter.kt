@@ -1,4 +1,4 @@
-package com.example.trekieapp
+package com.example.trekkieapp
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import com.example.trekieapp.model.EpisodeSummary
-import com.example.trekieapp.network.NetworkService
+import com.example.trekkieapp.model.EpisodeSummary
+import com.example.trekkieapp.network.NetworkService
 
 /**
  * [RecyclerView.Adapter] that can display a [DummyItem].

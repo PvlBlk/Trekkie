@@ -1,9 +1,9 @@
-package com.example.trekieapp.utils
+package com.example.trekkieapp.utils
 
 import android.util.Log
-import com.example.trekieapp.model.Episode
-import com.example.trekieapp.model.ResponseEntity
-import com.example.trekieapp.model.SpecificsEntity
+import com.example.trekkieapp.model.Episode
+import com.example.trekkieapp.model.ResponseEntity
+import com.example.trekkieapp.model.SpecificsEntity
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject

@@ -1,20 +1,19 @@
-package com.example.trekieapp.viewmodel
+package com.example.trekkieapp.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.trekieapp.model.Episode
-import com.example.trekieapp.model.EpisodeSummary
-import com.example.trekieapp.utils.Utils
+import com.example.trekkieapp.model.EpisodeSummary
+import com.example.trekkieapp.utils.Utils
 
 class ActivityViewModel : BaseViewModel() {
 
     var episodeSummaryLiveData = MutableLiveData<List<EpisodeSummary>>()
     var summaryList = mutableListOf<EpisodeSummary>()
-    suspend fun getEpisodesWithLiveData(text : String) {
+    suspend fun getEpisodesWithLiveData(text : String?) {
         loadEpisodes(text = text)
     }
 
-    suspend fun loadEpisodes(text: String){
+    suspend fun loadEpisodes(text: String?){
         summaryList.clear()
         val result = stapi.getEpisodes(text)
         Log.d("result::", "" +  result.body())

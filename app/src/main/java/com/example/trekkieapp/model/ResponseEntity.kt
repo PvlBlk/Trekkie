@@ -1,6 +1,4 @@
-package com.example.trekieapp.model
-
-import com.google.gson.annotations.SerializedName
+package com.example.trekkieapp.model
 
 /**
  * This of from Stapi
