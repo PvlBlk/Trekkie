@@ -26,7 +26,8 @@ class ActivityViewModel : BaseViewModel() {
     suspend fun loadEpisodesSpecifics(seasonNumber: Int, episodeNumber: Int, stardateFrom: Double, stardateTo: Double) {
         val result = movieApi.getEpisodeSpecifics(seasonNumber, episodeNumber)
         val specifics = Utils.parseSpecificJson(result.body())
-        var episodeSummary = EpisodeSummary(specifics?.air_date, specifics?.name, specifics?.overview, specifics?.season_number, specifics?.episode_number, specifics?.vote_average,
+        var parsedDate : String? = Utils.parseDateFormat(specifics?.air_date)
+        var episodeSummary = EpisodeSummary(parsedDate, specifics?.name, specifics?.overview, specifics?.season_number, specifics?.episode_number, specifics?.vote_average,
             stardateFrom, stardateTo, specifics?.still_path)
         summaryList.add(episodeSummary)
         Log.d("result::", "" + episodeSummary.toString())
