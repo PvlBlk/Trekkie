@@ -1,4 +1,4 @@
-package com.example.trekieapp
+package com.example.trekkieapp
 
 import com.google.gson.annotations.SerializedName
 

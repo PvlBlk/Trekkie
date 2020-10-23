@@ -10,34 +10,15 @@
         android:id="@+id/recyclerView"
         android:name="com.example.trekieapp.EpisodeFragment"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/searchField"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".fragment.EpisodeFragment"
         tools:listitem="@layout/fragment_item" />
-
-    <EditText
-        android:id="@+id/searchField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="-188dp" />
-
-    <Button
-        android:id="@+id/searchBtn"
-        android:layout_width="390dp"
-        android:layout_height="53dp"
-        android:text="SEARCH"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchField" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

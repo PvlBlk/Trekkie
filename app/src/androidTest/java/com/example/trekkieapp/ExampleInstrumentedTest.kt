@@ -1,4 +1,4 @@
-package com.example.trekieapp
+package com.example.trekkieapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

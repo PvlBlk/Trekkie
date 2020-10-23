@@ -1,4 +1,4 @@
-package com.example.trekieapp.network
+package com.example.trekkieapp.network
 
 import com.squareup.picasso.Picasso
 import okhttp3.Interceptor
