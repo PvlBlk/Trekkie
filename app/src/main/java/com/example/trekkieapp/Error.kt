@@ -1,7 +1,7 @@
 package com.example.trekkieapp
 
 import com.google.gson.annotations.SerializedName
-
+//TODO
 
 data class Error(
     @SerializedName("error_code")

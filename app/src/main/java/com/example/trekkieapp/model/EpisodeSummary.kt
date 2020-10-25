@@ -12,7 +12,8 @@ data class EpisodeSummary (
     val vote_average: Double?,
     val stardateFrom: Double?,
     val stardateTo: Double?,
-    val still_path: String?
+    val still_path: String?,
+    var expanded: Boolean? = false
 
     )
 {
