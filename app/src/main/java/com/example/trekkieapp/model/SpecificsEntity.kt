@@ -1,7 +1,7 @@
 package com.example.trekkieapp.model
 
 /**
- * This of from MovieApi
+ * This is from MovieApi
  */
 
 data class SpecificsEntity(

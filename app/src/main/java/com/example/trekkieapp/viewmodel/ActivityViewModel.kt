@@ -1,6 +1,7 @@
 package com.example.trekkieapp.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.trekkieapp.model.EpisodeSummary
 import com.example.trekkieapp.utils.Utils
@@ -13,7 +14,7 @@ class ActivityViewModel : BaseViewModel() {
         loadEpisodes(text = text)
     }
 
-    suspend fun loadEpisodes(text: String?){
+    private suspend fun loadEpisodes(text: String?){
         summaryList.clear()
         val result = stapi.getEpisodes(text)
         Log.d("result::", "" +  result.body())
@@ -23,7 +24,7 @@ class ActivityViewModel : BaseViewModel() {
         }
         episodeSummaryLiveData.postValue(summaryList)
     }
-    suspend fun loadEpisodesSpecifics(seasonNumber: Int, episodeNumber: Int, stardateFrom: Double, stardateTo: Double) {
+    private suspend fun loadEpisodesSpecifics(seasonNumber: Int, episodeNumber: Int, stardateFrom: Double, stardateTo: Double) {
         val result = movieApi.getEpisodeSpecifics(seasonNumber, episodeNumber)
         val specifics = Utils.parseSpecificJson(result.body())
         var parsedDate : String? = Utils.parseDateFormat(specifics?.air_date)

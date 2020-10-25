@@ -1,7 +1,7 @@
 package com.example.trekkieapp.model
 
 /**
- * This of from Stapi
+ * This is from Stapi
  */
 
 data class ResponseEntity(
