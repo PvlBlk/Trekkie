@@ -21,4 +21,8 @@
         <item name="colorControlActivated">@color/ratingBar</item>
     </style>
 
+    <style name="ProgressBarCustom">
+        <item name="colorAccent">@color/progress_bar_color</item> <!-- Whatever color you want-->
+    </style>
+
 </resources>

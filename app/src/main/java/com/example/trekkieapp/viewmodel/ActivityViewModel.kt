@@ -10,8 +10,12 @@ class ActivityViewModel : BaseViewModel() {
 
     var episodeSummaryLiveData = MutableLiveData<List<EpisodeSummary>>()
     var summaryList = mutableListOf<EpisodeSummary>()
+    var isLoading = MutableLiveData<Boolean>()
+
     suspend fun getEpisodesWithLiveData(text : String?) {
+        isLoading.postValue(true)
         loadEpisodes(text = text)
+        isLoading.postValue(false)
     }
 
     private suspend fun loadEpisodes(text: String?){

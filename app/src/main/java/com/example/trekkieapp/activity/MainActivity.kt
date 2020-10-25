@@ -6,6 +6,7 @@ import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
@@ -27,15 +28,31 @@ class MainActivity : AppCompatActivity()  {
 
     private lateinit var activityViewModel: ActivityViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityViewModel = ViewModelProviders.of(this).get(ActivityViewModel::class.java)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        progress_bar.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
+        observeIsLoading()
         observeGetPosts()
     }
+
+    private fun observeIsLoading() {
+        activityViewModel.isLoading.observe(this, Observer {
+            if (it){
+                progress_bar.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            }
+            else {
+                progress_bar.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
+        })
+    }
+
     private fun observeGetPosts() {
         activityViewModel.episodeSummaryLiveData.observe(this, Observer {
            fillRecyclerView(it)
@@ -89,13 +106,4 @@ class MainActivity : AppCompatActivity()  {
         return networkInfo?.isConnected == true
     }
 
-    private fun viewTwoLoading() {} //TODO - Загрузка с прогрессбаром
-
-    private fun viewTwoSuccess() {}
-
-    private fun viewTwoError(error: Error?) {
-        error?.let {
-
-        }
-    }
 }
