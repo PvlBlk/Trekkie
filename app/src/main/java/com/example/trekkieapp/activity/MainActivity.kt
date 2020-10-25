@@ -1,8 +1,12 @@
 package com.example.trekkieapp.activity
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
@@ -11,7 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.trekkieapp.Error
+import com.droidman.ktoasty.KToasty
 import com.example.trekkieapp.MyEpisodeRecyclerViewAdapter
 import com.example.trekkieapp.R
 import com.example.trekkieapp.model.EpisodeSummary
@@ -24,26 +28,38 @@ class MainActivity : AppCompatActivity()  {
 
     private lateinit var activityViewModel: ActivityViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityViewModel = ViewModelProviders.of(this).get(ActivityViewModel::class.java)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
+        progress_bar.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
+        observeIsLoading()
         observeGetPosts()
     }
-    private fun observeGetPosts() {
-        activityViewModel.episodeSummaryLiveData.observe(this, Observer {
-           fillRecyclerView(it)
-/*            it.forEach {
-              Toast.makeText(this, it.vote_average.toString(), LENGTH_SHORT).show()
-            }*/
+
+    private fun observeIsLoading() {
+        activityViewModel.isLoading.observe(this, Observer {
+            if (it){
+                progress_bar.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            }
+            else {
+                progress_bar.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
         })
     }
 
-private fun fillRecyclerView(list: List<EpisodeSummary>) {
+    private fun observeGetPosts() {
+        activityViewModel.episodeSummaryLiveData.observe(this, Observer {
+           fillRecyclerView(it)
+        })
+    }
+
+    private fun fillRecyclerView(list: List<EpisodeSummary>) {
     Log.d("fill::", "" + list.toString())
     clearRecyclerView()
     recyclerView.apply {
@@ -68,9 +84,13 @@ private fun fillRecyclerView(list: List<EpisodeSummary>) {
         searchView.queryHint = getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                if (isOnline()){
                 lifecycleScope.launch {
                     activityViewModel.getEpisodesWithLiveData(query)
                 }
+                return true
+            } else
+                    KToasty.warning(this@MainActivity, getString(R.string.no_connection), Toast.LENGTH_SHORT, true).show()
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -80,13 +100,10 @@ private fun fillRecyclerView(list: List<EpisodeSummary>) {
         return true
     }
 
-    private fun viewTwoLoading() {} //TODO - Загрузка с прогрессбаром
-
-    private fun viewTwoSuccess() {}
-
-    private fun viewTwoError(error: Error?) {
-        error?.let {
-            Toast.makeText(applicationContext, error.errorMsg, Toast.LENGTH_SHORT).show()
-        }
+    fun isOnline(): Boolean {
+        val connMgr = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo: NetworkInfo? = connMgr.activeNetworkInfo
+        return networkInfo?.isConnected == true
     }
+
 }
