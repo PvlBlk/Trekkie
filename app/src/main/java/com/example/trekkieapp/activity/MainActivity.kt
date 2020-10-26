@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.droidman.ktoasty.KToasty
 import com.example.trekkieapp.MyEpisodeRecyclerViewAdapter
 import com.example.trekkieapp.R
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity()  {
     clearRecyclerView()
     recyclerView.apply {
         layoutManager = LinearLayoutManager(context)
-        adapter = MyEpisodeRecyclerViewAdapter(list)
+        adapter = MyEpisodeRecyclerViewAdapter(list, this@MainActivity)
 
     }
 }
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity()  {
         list.removeAll(list)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = MyEpisodeRecyclerViewAdapter(list)
+            adapter = MyEpisodeRecyclerViewAdapter(list, this@MainActivity)
         }
     }
 
