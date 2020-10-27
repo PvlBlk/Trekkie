@@ -38,9 +38,7 @@ private val context: Context
 
         Glide.with(context).load("https://image.tmdb.org/t/p/w500"+item.still_path).centerCrop().into(holder.still)
         holder.airDate.text = item.air_date
-/*
-        holder.ratingBar.rating = (item.vote_average!! / 10 * 5 ).toFloat() //todo
-*/
+        holder.rating.text = item.vote_average.toString() + "/10"
         holder.title.text = item.name
         var isExpanded : Boolean? = item.expanded
         holder.expandableLayout.visibility = if (isExpanded!!) View.VISIBLE else View.GONE
@@ -61,9 +59,7 @@ private val context: Context
         val still: ImageView = view.findViewById(R.id.still)
 
         val airDate: TextView = view.findViewById(R.id.airDateTextView)
-/*
-        val ratingBar: RatingBar = view.findViewById(R.id.ratingBar)
-*/
+        val rating: TextView = view.findViewById(R.id.rating)
         var title: TextView = view.findViewById(R.id.title)
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
