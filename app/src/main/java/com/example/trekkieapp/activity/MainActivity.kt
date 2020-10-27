@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.droidman.ktoasty.KToasty
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity()  {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         progress_bar.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
+        recyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL)) //good stuff
         observeIsLoading()
         observeGetPosts()
     }
