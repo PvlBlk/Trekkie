@@ -1,9 +1,9 @@
-package com.example.trekkieapp.viewmodel
+package com.sevenzeroes.trekkieapp.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.trekkieapp.network.MovieApi
-import com.example.trekkieapp.network.Stapi
-import com.example.trekkieapp.network.NetworkService
+import com.sevenzeroes.trekkieapp.network.MovieApi
+import com.sevenzeroes.trekkieapp.network.Stapi
+import com.sevenzeroes.trekkieapp.network.NetworkService
 
 abstract class BaseViewModel : ViewModel() {
 

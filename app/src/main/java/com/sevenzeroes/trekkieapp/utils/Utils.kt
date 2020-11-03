@@ -1,19 +1,16 @@
-package com.example.trekkieapp.utils
+package com.sevenzeroes.trekkieapp.utils
 
 import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.example.trekkieapp.model.Episode
-import com.example.trekkieapp.model.ResponseEntity
-import com.example.trekkieapp.model.SpecificsEntity
+import com.sevenzeroes.trekkieapp.model.Episode
+import com.sevenzeroes.trekkieapp.model.ResponseEntity
+import com.sevenzeroes.trekkieapp.model.SpecificsEntity
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 
 object Utils {
     @JvmStatic

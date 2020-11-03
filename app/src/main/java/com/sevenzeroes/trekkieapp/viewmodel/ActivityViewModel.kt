@@ -1,10 +1,9 @@
-package com.example.trekkieapp.viewmodel
+package com.sevenzeroes.trekkieapp.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.trekkieapp.model.EpisodeSummary
-import com.example.trekkieapp.utils.Utils
+import com.sevenzeroes.trekkieapp.model.EpisodeSummary
+import com.sevenzeroes.trekkieapp.utils.Utils
 
 class ActivityViewModel : BaseViewModel() {
 
