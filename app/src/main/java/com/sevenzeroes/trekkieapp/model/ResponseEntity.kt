@@ -1,4 +1,4 @@
-package com.example.trekkieapp.model
+package com.sevenzeroes.trekkieapp.model
 
 /**
  * This is from Stapi

@@ -1,4 +1,4 @@
-package com.example.trekkieapp.activity
+package com.sevenzeroes.trekkieapp.activity
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -16,12 +16,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.droidman.ktoasty.KToasty
-import com.example.trekkieapp.MyEpisodeRecyclerViewAdapter
-import com.example.trekkieapp.R
-import com.example.trekkieapp.model.EpisodeSummary
-import com.example.trekkieapp.viewmodel.ActivityViewModel
+import com.sevenzeroes.trekkieapp.MyEpisodeRecyclerViewAdapter
+import com.sevenzeroes.trekkieapp.R
+import com.sevenzeroes.trekkieapp.model.EpisodeSummary
+import com.sevenzeroes.trekkieapp.viewmodel.ActivityViewModel
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.coroutines.launch
 

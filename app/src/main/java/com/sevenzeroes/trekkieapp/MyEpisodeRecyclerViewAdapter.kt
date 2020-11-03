@@ -1,4 +1,4 @@
-package com.example.trekkieapp
+package com.sevenzeroes.trekkieapp
 
 import android.content.Context
 import androidx.recyclerview.widget.RecyclerView
@@ -6,14 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RatingBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideBuilder
-import com.example.trekkieapp.activity.MainActivity
-import com.example.trekkieapp.model.EpisodeSummary
-import com.example.trekkieapp.network.NetworkService
+import com.sevenzeroes.trekkieapp.model.EpisodeSummary
 
 /**
  * [RecyclerView.Adapter]

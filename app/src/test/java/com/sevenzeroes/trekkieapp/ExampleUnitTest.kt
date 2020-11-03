@@ -1,4 +1,4 @@
-package com.example.trekkieapp
+package com.sevenzeroes.trekkieapp
 
 import org.junit.Test
 
