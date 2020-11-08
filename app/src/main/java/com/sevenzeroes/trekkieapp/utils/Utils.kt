@@ -29,12 +29,15 @@ object Utils {
     }
 
     @JvmStatic
-    fun parseDateFormat(dateString: String?): String {
+    fun parseDateFormat(dateString: String?): String? {
         if (Build.VERSION.SDK_INT >= 26) {
+            if (dateString!=null){
             val parsedDate = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE)
-            var formatter = DateTimeFormatter.ofPattern("d MMM uuuu")
-            val formattedDate = formatter.format(parsedDate)
-            return formattedDate
+                var formatter = DateTimeFormatter.ofPattern("d MMM uuuu")
+                val formattedDate = formatter.format(parsedDate)
+                return formattedDate
+            }
+            return "n/a"
 
         } else {
             val parser = SimpleDateFormat("yyyy-MM-dd")
