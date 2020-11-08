@@ -31,14 +31,15 @@ private val context: Context
         val item = values[position]
         // holder.idView.text = item.air_date
         holder.contentView.text = item.overview
-
         Glide.with(context).load("https://image.tmdb.org/t/p/w500"+item.still_path).centerCrop().into(holder.still)
         holder.airDate.text = item.air_date
         holder.rating.text = item.vote_average.toString() + "/10"
         holder.title.text = item.name
+        var seasonEpisodePlaceholder = "s0" + item.season_number + "e" + item.episode_number
+        holder.seasonEpisode.text = seasonEpisodePlaceholder
         var isExpanded : Boolean? = item.expanded
         holder.expandableLayout.visibility = if (isExpanded!!) View.VISIBLE else View.GONE
-        holder.title.setOnClickListener{
+        holder.headLayout.setOnClickListener{
             item.expanded = !item.expanded!!
             notifyItemChanged(position)
         }
@@ -50,11 +51,12 @@ private val context: Context
 
        // val idView: TextView = view.findViewById(R.id.item_number)
         val expandableLayout : ConstraintLayout = view.findViewById(R.id.expandableLayout)
+        val headLayout : ConstraintLayout = view.findViewById(R.id.head)
         val contentView: TextView = view.findViewById(R.id.content)
 
         val still: ImageView = view.findViewById(R.id.still)
-
-        val airDate: TextView = view.findViewById(R.id.airDateTextView)
+        val seasonEpisode: TextView = view.findViewById(R.id.season_episode)
+        val airDate: TextView = view.findViewById(R.id.air_date)
         val rating: TextView = view.findViewById(R.id.rating)
         var title: TextView = view.findViewById(R.id.title)
         override fun toString(): String {
