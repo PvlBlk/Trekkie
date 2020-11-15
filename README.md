@@ -1,7 +1,7 @@
 # Trekie_app
 Star Trek: TNG - Episode Guide
 
-Android 4.4+ 
+Android 7.0+
 
 Small app that can search info on individual Star Trek: The Next Generation episodes. 
 
