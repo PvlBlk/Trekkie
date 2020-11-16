@@ -1,4 +1,4 @@
-# Trekie_app
+# Trekkie
 Star Trek: TNG - Episode Guide
 
 Android 7.0+
