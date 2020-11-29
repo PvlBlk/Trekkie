@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity()  {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        progress_bar.visibility = View.GONE
+        shimmerLayout.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
         recyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL)) //good stuff
         observeIsLoading()
@@ -45,11 +45,13 @@ class MainActivity : AppCompatActivity()  {
     private fun observeIsLoading() {
         activityViewModel.isLoading.observe(this, Observer {
             if (it){
-                progress_bar.visibility = View.VISIBLE
+                shimmerLayout.visibility = View.VISIBLE
+                shimmerLayout.startShimmer()
                 recyclerView.visibility = View.GONE
             }
             else {
-                progress_bar.visibility = View.GONE
+                shimmerLayout.stopShimmer()
+                shimmerLayout.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE
             }
         })

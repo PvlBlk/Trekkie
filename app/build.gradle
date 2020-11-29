@@ -65,4 +65,7 @@ dependencies {
     //Toasty
     implementation 'com.github.shubhamvashisht:KToasty:1.0'
 
+    //Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
 }
