@@ -12,4 +12,6 @@
     <string name="search_hint">Название эпизода…</string>
     <string name="no_connection">Пожалуйста, проверье ваше подключение</string>
     <string name="air_date">Премьера</string>
+    <string name="use_search">Воспользуйтесь поиском…</string>
+
 </resources>
