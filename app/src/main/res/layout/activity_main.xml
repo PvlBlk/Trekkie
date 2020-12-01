@@ -24,24 +24,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
-<!--    <TextView
-        android:id="@+id/resultText"
-        android:layout_width="317dp"
-        android:layout_height="101dp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="center"></TextView>
-
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="121dp"
-        android:layout_height="79dp"
-        android:text="Button"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_first" />-->
 
     <include
         android:id="@+id/include"

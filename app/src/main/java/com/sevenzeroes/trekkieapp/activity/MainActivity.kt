@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity()  {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         shimmerLayout.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
+        prompt.visibility = View.VISIBLE
         recyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL)) //good stuff
         observeIsLoading()
         observeGetPosts()
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity()  {
                 shimmerLayout.visibility = View.VISIBLE
                 shimmerLayout.startShimmer()
                 recyclerView.visibility = View.GONE
+                togglePromptVisibility(false)
             }
             else {
                 shimmerLayout.stopShimmer()
@@ -59,10 +61,22 @@ class MainActivity : AppCompatActivity()  {
 
     private fun observeGetPosts() {
         activityViewModel.episodeSummaryLiveData.observe(this, Observer {
-           fillRecyclerView(it)
+           if (it.isEmpty()) {
+               togglePromptVisibility(true)
+           }
+            else {
+            fillRecyclerView(it)
+                togglePromptVisibility(false)
+            }
         })
     }
-
+    private fun togglePromptVisibility(visibility : Boolean){
+        if (visibility) {
+            prompt.visibility = View.VISIBLE
+        } else {
+            prompt.visibility = View.GONE
+        }
+    }
     private fun fillRecyclerView(list: List<EpisodeSummary>) {
     Log.d("fill::", "" + list.toString())
     clearRecyclerView()

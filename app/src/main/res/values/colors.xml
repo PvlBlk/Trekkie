@@ -12,5 +12,10 @@
     <color name="black">#000000</color>
     <color name="colorGrey">#dddddd</color>
 
+    <color name="rating_red">#AF1509</color>
+    <color name="rating_yellow">#AF8009</color>
+    <color name="rating_green">#35AF09</color>
+
+
 
 </resources>

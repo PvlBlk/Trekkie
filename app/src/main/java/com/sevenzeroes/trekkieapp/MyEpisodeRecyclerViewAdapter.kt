@@ -1,6 +1,7 @@
 package com.sevenzeroes.trekkieapp
 
 import android.content.Context
+import android.graphics.Color.red
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.getColor
 import com.bumptech.glide.Glide
 import com.sevenzeroes.trekkieapp.model.EpisodeSummary
 
@@ -33,7 +35,8 @@ private val context: Context
         holder.contentView.text = item.overview
         Glide.with(context).load("https://image.tmdb.org/t/p/w500"+item.still_path).centerCrop().into(holder.still)
         holder.airDate.text = item.air_date
-        holder.rating.text = item.vote_average.toString() + "/10"
+        holder.rating.text = item.vote_average.toString()
+        holder.rating.setTextColor(getColor(context, pickColor(item.vote_average)))
         holder.title.text = item.name
         var seasonEpisodePlaceholder = "s0" + item.season_number + "e" + item.episode_number
         holder.seasonEpisode.text = seasonEpisodePlaceholder
@@ -43,6 +46,19 @@ private val context: Context
             item.expanded = !item.expanded!!
             notifyItemChanged(position)
         }
+    }
+
+    private fun pickColor(vote : Double?) : Int {
+        var voteInt : Int = vote?.toInt()!!
+        val color : Int =
+        when (voteInt) {
+            in 0..4 -> R.color.rating_red
+            in 4..6 -> R.color.rating_yellow
+            else -> {
+                R.color.rating_green
+            }
+        }
+        return color
     }
 
     override fun getItemCount(): Int = values.size
@@ -62,6 +78,5 @@ private val context: Context
         override fun toString(): String {
             return super.toString() + " '" + contentView.text + "'"
         }
-//TODO
     }
 }
