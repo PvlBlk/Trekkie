@@ -49,7 +49,7 @@ private val context: Context
     }
 
     private fun pickColor(vote : Double?) : Int {
-        var voteInt : Int = vote?.toInt()!!
+        val voteInt : Int = vote?.toInt()!!
         val color : Int =
         when (voteInt) {
             in 0..4 -> R.color.rating_red

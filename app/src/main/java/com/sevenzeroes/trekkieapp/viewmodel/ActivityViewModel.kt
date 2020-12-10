@@ -33,9 +33,10 @@ class ActivityViewModel : BaseViewModel() {
         var parsedDate : String? = Utils.parseDateFormat(specifics?.air_date)
         var episodeSummary = EpisodeSummary(parsedDate, specifics?.name, specifics?.overview, specifics?.season_number, specifics?.episode_number, specifics?.vote_average,
             stardateFrom, stardateTo, specifics?.still_path)
+        if (episodeSummary.name!=null ){
         summaryList.add(episodeSummary)
+        }
         Log.d("result::", "" + episodeSummary.toString())
     }
-
 
 }
