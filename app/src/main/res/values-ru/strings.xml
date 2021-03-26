@@ -13,5 +13,7 @@
     <string name="no_connection">Пожалуйста, проверье ваше подключение</string>
     <string name="air_date">Премьера</string>
     <string name="use_search">Воспользуйтесь поиском…</string>
+    <string name="list_bnv_item">Эпизоды</string>
+    <string name="favourite_bnv_item">Избранное</string>
 
 </resources>

@@ -1,7 +1,6 @@
-package com.sevenzeroes.trekkieapp
+package com.sevenzeroes.trekkieapp.list.ui
 
 import android.content.Context
-import android.graphics.Color.red
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +10,15 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.getColor
 import com.bumptech.glide.Glide
-import com.sevenzeroes.trekkieapp.model.EpisodeSummary
+import com.sevenzeroes.trekkieapp.R
+import com.sevenzeroes.trekkieapp.list.data.EpisodeSummary
 
 /**
  * [RecyclerView.Adapter]
  */
 class MyEpisodeRecyclerViewAdapter(
     private val values: List<EpisodeSummary>,
-private val context: Context
+    private val context: Context
 ) : RecyclerView.Adapter<MyEpisodeRecyclerViewAdapter.ViewHolder>() {
 
 

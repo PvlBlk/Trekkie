@@ -1,10 +1,7 @@
-package com.sevenzeroes.trekkieapp.utils
+package com.sevenzeroes.trekkieapp.list.data
 
 import android.os.Build
 import android.util.Log
-import com.sevenzeroes.trekkieapp.model.Episode
-import com.sevenzeroes.trekkieapp.model.ResponseEntity
-import com.sevenzeroes.trekkieapp.model.SpecificsEntity
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject

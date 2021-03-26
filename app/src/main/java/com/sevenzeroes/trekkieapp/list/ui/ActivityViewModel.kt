@@ -1,11 +1,18 @@
-package com.sevenzeroes.trekkieapp.viewmodel
+package com.sevenzeroes.trekkieapp.list.ui
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.sevenzeroes.trekkieapp.model.EpisodeSummary
-import com.sevenzeroes.trekkieapp.utils.Utils
+import androidx.lifecycle.ViewModel
+import com.sevenzeroes.trekkieapp.list.data.EpisodeSummary
+import com.sevenzeroes.trekkieapp.list.data.Utils
+import com.sevenzeroes.trekkieapp.list.domain.MovieApi
+import com.sevenzeroes.trekkieapp.list.domain.NetworkService
+import com.sevenzeroes.trekkieapp.list.domain.Stapi
 
-class ActivityViewModel : BaseViewModel() {
+class ActivityViewModel: ViewModel () {
+
+    var stapi: Stapi = NetworkService.stapiRetrofitService()
+    var movieApi: MovieApi = NetworkService.movieRetrofitService()
 
     var episodeSummaryLiveData = MutableLiveData<List<EpisodeSummary>>()
     var summaryList = mutableListOf<EpisodeSummary>()

@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.network
+package com.sevenzeroes.trekkieapp.list.domain
 
 import com.google.gson.JsonElement
 import retrofit2.Response

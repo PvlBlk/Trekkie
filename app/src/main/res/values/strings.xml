@@ -12,5 +12,7 @@
     <string name="no_connection">Please, check your Internet connection</string>
     <string name="air_date">Aired</string>
     <string name="use_search">Use search…</string>
+    <string name="list_bnv_item">List</string>
+    <string name="favourite_bnv_item">Favourite</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.model
+package com.sevenzeroes.trekkieapp.list.data
 
 /**
  * Summary of both API's that is used for UI

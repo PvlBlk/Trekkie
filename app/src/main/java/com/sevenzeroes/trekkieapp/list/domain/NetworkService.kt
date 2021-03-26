@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.network
+package com.sevenzeroes.trekkieapp.list.domain
 
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Companion.invoke
@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkService {
 
-    private const val STAPI_BASE_URL = " http://stapi.co/api/v1/rest/"
+    private const val STAPI_BASE_URL = "http://stapi.co/api/v1/rest/"
     private const val MOVIE_API_BASE_URL = " https://api.themoviedb.org/"
 
     private val loggingInterceptor = run {
