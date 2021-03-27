@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity()  {
 
     private fun setupViewPager(){
         binding.vpMain.adapter = ScreenSlidePagerAdapter(this)
+        binding.vpMain.isUserInputEnabled = false
     }
 
     private fun initBnvListener() {
@@ -34,16 +35,15 @@ class MainActivity : AppCompatActivity()  {
             }
             true
         }
+
     }
 
     private fun openList(){
         binding.vpMain.currentItem = 0
-        binding.bnvMain.selectedItemId = R.id.bnvListItem
     }
 
     private fun openFavourites(){
         binding.vpMain.currentItem = 1
-        binding.bnvMain.selectedItemId = R.id.bnvFavouriteItem
     }
 
     private inner class ScreenSlidePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {

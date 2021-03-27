@@ -15,5 +15,9 @@
     <string name="use_search">Воспользуйтесь поиском…</string>
     <string name="list_bnv_item">Эпизоды</string>
     <string name="favourite_bnv_item">Избранное</string>
+    <string name="title_example">Measure of a man</string>
+    <string name="season_episode_example">s01e01</string>
+    <string name="rating_example">10/10</string>
+    <string name="air_date_example">11 июля 1990</string>
 
 </resources>

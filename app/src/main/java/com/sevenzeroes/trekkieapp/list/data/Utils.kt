@@ -6,8 +6,8 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.sevenzeroes.trekkieapp.list.domain.Episode
+import com.sevenzeroes.trekkieapp.list.domain.EpisodeEntity
 import com.sevenzeroes.trekkieapp.list.domain.ResponseEntity
-import com.sevenzeroes.trekkieapp.list.domain.SpecificsEntity
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -21,9 +21,9 @@ object Utils {
         return result.episodes
     }
     @JvmStatic
-    fun parseSpecificJson(response : JsonElement?) : SpecificsEntity? {
+    fun parseSpecificJson(response : JsonElement?) : EpisodeEntity? {
         response as JsonObject?
-        val result : SpecificsEntity? = Gson().fromJson(response, SpecificsEntity::class.java)
+        val result : EpisodeEntity? = Gson().fromJson(response, EpisodeEntity::class.java)
         Log.d("Utils::", "" + result.toString())
         return result
     }

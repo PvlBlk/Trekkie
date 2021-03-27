@@ -14,5 +14,9 @@
     <string name="use_search">Use search…</string>
     <string name="list_bnv_item">List</string>
     <string name="favourite_bnv_item">Favourite</string>
+    <string name="title_example">Measure of a man</string>
+    <string name="season_episode_example">s01e01</string>
+    <string name="rating_example">10/10</string>
+    <string name="air_date_example">July 11, 1990</string>
 
 </resources>
