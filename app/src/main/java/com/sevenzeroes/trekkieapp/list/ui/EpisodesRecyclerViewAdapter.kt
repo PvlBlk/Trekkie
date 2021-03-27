@@ -5,9 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat.getColor
 import com.bumptech.glide.Glide
 import com.sevenzeroes.trekkieapp.R
@@ -55,16 +52,13 @@ class EpisodesRecyclerViewAdapter(
     }
 
     private fun pickColor(vote : Double?) : Int {
-        val voteInt : Int = vote?.toInt()!!
-        val color : Int =
-        when (voteInt) {
+        return when (vote?.toInt()!!) {
             in 0..4 -> R.color.rating_red
             in 4..6 -> R.color.rating_yellow
             else -> {
                 R.color.rating_green
             }
         }
-        return color
     }
 
     override fun getItemCount(): Int = values.size
