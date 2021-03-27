@@ -1,34 +1,14 @@
 package com.sevenzeroes.trekkieapp.list.ui
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.droidman.ktoasty.KToasty
-import com.facebook.shimmer.ShimmerFrameLayout
-import com.sevenzeroes.trekkieapp.R
-import com.sevenzeroes.trekkieapp.databinding.ActivityMainBinding
-import com.sevenzeroes.trekkieapp.databinding.ContentMainBinding
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
 import com.sevenzeroes.trekkieapp.list.data.EpisodeSummary
-import com.sevenzeroes.trekkieapp.utils.hide
-import com.sevenzeroes.trekkieapp.utils.show
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class EpisodesFragment : Fragment() {
@@ -37,22 +17,41 @@ class EpisodesFragment : Fragment() {
         fun newInstance() = EpisodesFragment()
     }
 
-    private lateinit var viewModel: EpisodesViewModel
+    private lateinit var episodesViewModel: EpisodesViewModel
     private lateinit var binding: EpisodesFragmentBinding
+    private lateinit var adapter: EpisodesRecyclerViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = EpisodesFragmentBinding.inflate(layoutInflater, container, false)
+        episodesViewModel = ViewModelProvider(this).get(EpisodesViewModel::class.java)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(EpisodesViewModel::class.java)
-        // TODO: Use the ViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupEpisodesList()
+        observeEpisodes()
+        GlobalScope.launch {
+        episodesViewModel.getEpisodesWithLiveData("Realm of")
+        }
     }
 
+    private fun setupEpisodesList(){
+        adapter = EpisodesRecyclerViewAdapter()
+        binding.rvEpisodeList.adapter = adapter
+/*        val episode1 = EpisodeSummary(name = "Name", overview = "Stuff")
+        val episode2 = EpisodeSummary(name = "Name", overview = "Stuff")
 
+        adapter.setData(listOf(episode1, episode2))*/
+    }
 
+    private fun observeEpisodes(){
+        episodesViewModel.episodeSummaryLiveData.observe(viewLifecycleOwner, {
+            adapter.setData(it)
+        })
+    }
 /*
     class MainActivity : AppCompatActivity()  {
 
