@@ -26,16 +26,26 @@ class MainActivity : AppCompatActivity()  {
         binding.vpMain.adapter = ScreenSlidePagerAdapter(this)
     }
 
-
     private fun initBnvListener() {
         binding.bnvMain.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.bnvListItem -> binding.vpMain.currentItem = 0
-                R.id.bnvFavouriteItem -> binding.vpMain.currentItem = 1
+                R.id.bnvListItem -> openList()
+                R.id.bnvFavouriteItem -> openFavourites()
             }
             true
         }
     }
+
+    private fun openList(){
+        binding.vpMain.currentItem = 0
+        binding.bnvMain.selectedItemId = R.id.bnvListItem
+    }
+
+    private fun openFavourites(){
+        binding.vpMain.currentItem = 1
+        binding.bnvMain.selectedItemId = R.id.bnvFavouriteItem
+    }
+
     private inner class ScreenSlidePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
         override fun getItemCount(): Int = 2
 

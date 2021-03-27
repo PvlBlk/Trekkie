@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkService {
 
     private const val STAPI_BASE_URL = "http://stapi.co/api/v1/rest/"
-    private const val MOVIE_API_BASE_URL = " https://api.themoviedb.org/"
+    private const val TMDB_BASE_URL = "https://api.themoviedb.org/"
 
     private val loggingInterceptor = run {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -52,7 +52,7 @@ object NetworkService {
 
     fun movieRetrofitService(): MovieApi {
         return Retrofit.Builder()
-            .baseUrl(MOVIE_API_BASE_URL)
+            .baseUrl(TMDB_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
