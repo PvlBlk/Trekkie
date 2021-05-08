@@ -11,11 +11,13 @@ import com.sevenzeroes.trekkieapp.databinding.MainViewpagerBinding
 
 class MainActivity : AppCompatActivity()  {
 
-    private lateinit var binding: MainViewpagerBinding
+    private var _binding: MainViewpagerBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = MainViewpagerBinding.inflate(layoutInflater)
+        _binding = MainViewpagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupViewPager()

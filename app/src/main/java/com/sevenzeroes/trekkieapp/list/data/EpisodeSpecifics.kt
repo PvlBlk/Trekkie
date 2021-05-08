@@ -1,5 +1,8 @@
-package com.sevenzeroes.trekkieapp.list.domain
+package com.sevenzeroes.trekkieapp.list.data
 
+/**
+ * This is from TMDB
+ */
 data class EpisodeEntity(
     val air_date: String,
     val crew: List<Crew>,

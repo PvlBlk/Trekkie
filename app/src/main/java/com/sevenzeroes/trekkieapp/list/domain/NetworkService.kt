@@ -50,7 +50,7 @@ object NetworkService {
             .create(Stapi::class.java)
     }
 
-    fun movieRetrofitService(): MovieApi {
+    fun tmdbRetrofitService(): MovieApi {
         return Retrofit.Builder()
             .baseUrl(TMDB_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -58,6 +58,5 @@ object NetworkService {
             .build()
             .create(MovieApi::class.java)
     }
-
 
 }

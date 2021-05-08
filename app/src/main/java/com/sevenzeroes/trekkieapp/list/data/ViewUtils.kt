@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.utils
+package com.sevenzeroes.trekkieapp.list.data
 
 import android.view.View
 

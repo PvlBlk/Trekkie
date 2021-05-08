@@ -1,7 +1,7 @@
 package com.sevenzeroes.trekkieapp.list.data
 
 /**
- * Summary of both API's that is used for UI
+ * Summary of both API's
  */
 data class EpisodeSummary (
     val air_date: String? = "",
@@ -14,7 +14,4 @@ data class EpisodeSummary (
     val stardateTo: Double? = null,
     val still_path: String? = "",
     var expanded: Boolean? = false
-
     )
-{
-}

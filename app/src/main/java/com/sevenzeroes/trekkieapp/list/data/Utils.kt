@@ -5,9 +5,6 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
-import com.sevenzeroes.trekkieapp.list.domain.Episode
-import com.sevenzeroes.trekkieapp.list.domain.EpisodeEntity
-import com.sevenzeroes.trekkieapp.list.domain.ResponseEntity
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

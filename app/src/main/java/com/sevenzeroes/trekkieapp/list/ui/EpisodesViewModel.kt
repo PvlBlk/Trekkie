@@ -5,26 +5,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sevenzeroes.trekkieapp.list.data.EpisodeSummary
 import com.sevenzeroes.trekkieapp.list.data.Utils
-import com.sevenzeroes.trekkieapp.list.domain.MovieApi
 import com.sevenzeroes.trekkieapp.list.domain.NetworkService
-import com.sevenzeroes.trekkieapp.list.domain.Stapi
 
 class EpisodesViewModel : ViewModel() {
 
-    var stapi: Stapi = NetworkService.stapiRetrofitService()
-    var movieApi: MovieApi = NetworkService.movieRetrofitService()
+    var stapi = NetworkService.stapiRetrofitService()
+    var movieApi = NetworkService.tmdbRetrofitService()
 
     var episodeSummaryLiveData = MutableLiveData<List<EpisodeSummary>>()
     var summaryList = mutableListOf<EpisodeSummary>()
     var isLoading = MutableLiveData<Boolean>()
 
-    suspend fun getEpisodesWithLiveData(text : String?) {
+    suspend fun getEpisodes(text : String?) {
         isLoading.postValue(true)
-        loadEpisodes(text = text)
+        fetchEpisodes(text = text)
         isLoading.postValue(false)
     }
 
-    private suspend fun loadEpisodes(text: String?){
+    private suspend fun fetchEpisodes(text: String?){
         summaryList.clear()
         val result = stapi.getEpisodes(text)
         Log.d("result::", "" +  result.body())

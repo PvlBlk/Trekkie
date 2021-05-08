@@ -8,8 +8,6 @@ import retrofit2.http.Query
 interface Stapi {
 
     @POST("episode/search")
-    suspend fun getEpisodes(
-        @Query("title") page: String?
-    ): Response<JsonElement>
+    suspend fun getEpisodes(@Query("title") page: String?): Response<JsonElement>
 
 }

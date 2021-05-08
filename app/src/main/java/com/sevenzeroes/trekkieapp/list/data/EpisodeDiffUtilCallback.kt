@@ -3,8 +3,8 @@ package com.sevenzeroes.trekkieapp.list.data
 import androidx.recyclerview.widget.DiffUtil
 
 class EpisodeDiffUtilCallback(var oldList: List<EpisodeSummary>, var newList: List<EpisodeSummary>): DiffUtil.Callback() {
-    override fun getOldListSize()=oldList.size
 
+    override fun getOldListSize()=oldList.size
 
     override fun getNewListSize()=newList.size
 
