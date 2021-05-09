@@ -15,6 +15,6 @@ interface EpisodesDao {
     suspend fun getAllEpisodesFromDb() : EpisodeSummary
 
     @Insert
-    fun insert(vararg episodes: EpisodeSummary)
+    suspend fun insert(vararg episodes: EpisodeSummary)
 
 }

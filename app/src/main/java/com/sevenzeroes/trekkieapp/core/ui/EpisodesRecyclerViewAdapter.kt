@@ -10,9 +10,11 @@ import com.sevenzeroes.trekkieapp.R
 import com.sevenzeroes.trekkieapp.databinding.EpisodeItemBinding
 import com.sevenzeroes.trekkieapp.core.data.EpisodeDiffUtilCallback
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
-class EpisodesRecyclerViewAdapter : RecyclerView.Adapter<EpisodesRecyclerViewAdapter.ViewHolder>() {
+class EpisodesRecyclerViewAdapter(private val episodesViewModel: EpisodesViewModel) : RecyclerView.Adapter<EpisodesRecyclerViewAdapter.ViewHolder>() {
 
     private var episodes = listOf<EpisodeSummary>()
 
@@ -29,28 +31,32 @@ class EpisodesRecyclerViewAdapter : RecyclerView.Adapter<EpisodesRecyclerViewAda
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val episode = episodes[position]
         val binding = holder.binding
+        val isExpanded : Boolean? = episode.expanded
+        val seasonEpisodePlaceholder = "s0" + episode.season_number + "e" + episode.episode_number
 
         binding.apply {
             tvTitle.text = episode.name
             tvEpisodeSummary.text = episode.overview
             tvAirDate.text = episode.air_date
             tvRating.text = episode.vote_average.toString()
+            tvSeasonEpisode.text = seasonEpisodePlaceholder
+
+            clExpandable.visibility = if (isExpanded!!) View.VISIBLE else View.GONE
+            clEpisodeTop.setOnClickListener{
+                episode.expanded = !episode.expanded!!
+                notifyItemChanged(position)
+            }
+            ivFavorite.setOnClickListener {
+                GlobalScope.launch {
+                    episodesViewModel.interactors?.insert?.invoke(episode)
+                }
+            }
         }
-
             //        binding.tvRating.setTextColor(getColor(binding.root.context, pickColor(episode.vote_average)))
-
-        val seasonEpisodePlaceholder = "s0" + episode.season_number + "e" + episode.episode_number
-        binding.tvSeasonEpisode.text = seasonEpisodePlaceholder
 
         Glide.with(binding.ivStill.context).load(IMAGES_BASE_URL+episode.still_path).centerCrop().into(binding.ivStill)
 
-        val isExpanded : Boolean? = episode.expanded
-        binding.clExpandable.visibility = if (isExpanded!!) View.VISIBLE else View.GONE
 
-        binding.clEpisodeTop.setOnClickListener{
-            episode.expanded = !episode.expanded!!
-            notifyItemChanged(position)
-        }
     }
 
     private fun pickColor(vote : Double?) : Int {

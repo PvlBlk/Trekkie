@@ -40,7 +40,7 @@ class EpisodesFragment : Fragment() {
     }
 
     private fun setupEpisodesList(){
-        adapter = EpisodesRecyclerViewAdapter()
+        adapter = EpisodesRecyclerViewAdapter(episodesViewModel)
         binding.rvEpisodeList.adapter = adapter
     }
 

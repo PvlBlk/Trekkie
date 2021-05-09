@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
 data class EpisodeSummary (
     val air_date: String? = "",
     @PrimaryKey
-    val name: String?= "",
+    val name: String= "",
     val overview: String?= "",
     val season_number: Int?= null,
     val episode_number: Int?= null,
