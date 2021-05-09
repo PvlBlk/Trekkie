@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.list.ui
+package com.sevenzeroes.trekkieapp.core.ui
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.sevenzeroes.trekkieapp.R
 import com.sevenzeroes.trekkieapp.databinding.EpisodeItemBinding
-import com.sevenzeroes.trekkieapp.list.data.EpisodeDiffUtilCallback
-import com.sevenzeroes.trekkieapp.list.data.EpisodeSummary
+import com.sevenzeroes.trekkieapp.core.data.EpisodeDiffUtilCallback
+import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 
 
 class EpisodesRecyclerViewAdapter : RecyclerView.Adapter<EpisodesRecyclerViewAdapter.ViewHolder>() {
@@ -66,7 +66,7 @@ class EpisodesRecyclerViewAdapter : RecyclerView.Adapter<EpisodesRecyclerViewAda
 
     }
 
-    fun setData(newEpisodes: List<EpisodeSummary>){
+    fun setData(newEpisodes: MutableList<EpisodeSummary>){
         val diffUtilCallback = EpisodeDiffUtilCallback(episodes, newEpisodes)
         val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
         episodes = newEpisodes

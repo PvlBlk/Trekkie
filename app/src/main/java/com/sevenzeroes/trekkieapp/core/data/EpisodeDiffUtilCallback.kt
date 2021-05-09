@@ -1,6 +1,7 @@
-package com.sevenzeroes.trekkieapp.list.data
+package com.sevenzeroes.trekkieapp.core.data
 
 import androidx.recyclerview.widget.DiffUtil
+import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 
 class EpisodeDiffUtilCallback(var oldList: List<EpisodeSummary>, var newList: List<EpisodeSummary>): DiffUtil.Callback() {
 

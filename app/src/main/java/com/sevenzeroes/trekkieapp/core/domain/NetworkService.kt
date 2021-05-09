@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.list.domain
+package com.sevenzeroes.trekkieapp.core.domain
 
 import okhttp3.Interceptor
 import okhttp3.Interceptor.Companion.invoke

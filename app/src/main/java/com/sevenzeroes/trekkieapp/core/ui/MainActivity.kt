@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.list.ui
+package com.sevenzeroes.trekkieapp.core.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

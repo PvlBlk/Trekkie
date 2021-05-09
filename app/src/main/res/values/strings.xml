@@ -20,4 +20,7 @@
     <string name="air_date_example">July 11, 1990</string>
     <string name="overview_example">When the USS Enterprise arrives at a newly-established Starbase, Data is ordered to serve Captain Bruce Maddox, who wishes to disassemble Data to study him. When Data learns that Maddox may not be able to reassemble him, he refuses and Picard is enlisted to defend his rights in court.</string>
 
+    <string name="message_loading">Loading</string>
+    <string name="message_error">Error</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.list.data
+package com.sevenzeroes.trekkieapp.core.domain.models
 
 /**
  * This is from Stapi

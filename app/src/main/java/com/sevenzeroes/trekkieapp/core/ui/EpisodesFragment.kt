@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.list.ui
+package com.sevenzeroes.trekkieapp.core.ui
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,8 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.sevenzeroes.trekkieapp.R
+import com.sevenzeroes.trekkieapp.core.helpers.Event
+import com.sevenzeroes.trekkieapp.core.helpers.Status
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
+import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.launch
 
 class EpisodesFragment : Fragment() {
@@ -29,22 +35,29 @@ class EpisodesFragment : Fragment() {
         setupEpisodesList()
         observeEpisodes()
         viewLifecycleOwner.lifecycleScope.launch {
-        episodesViewModel.getEpisodes("realm of")
+        episodesViewModel.getEpisodes("data")
         }
     }
 
     private fun setupEpisodesList(){
         adapter = EpisodesRecyclerViewAdapter()
         binding.rvEpisodeList.adapter = adapter
-/*        val episode1 = EpisodeSummary(name = "Name", overview = "Stuff")
-        val episode2 = EpisodeSummary(name = "Name", overview = "Stuff")
-
-        adapter.setData(listOf(episode1, episode2))*/
     }
 
     private fun observeEpisodes(){
-        episodesViewModel.episodeSummaryLiveData.observe(viewLifecycleOwner, {
-            adapter.setData(it)
+        episodesViewModel.episodes.observe(viewLifecycleOwner, {
+            when (it.status){
+                Status.SUCCESS -> {
+                    if (it.data!=null)
+                    adapter.setData(it.data)
+                }
+                Status.LOADING -> {
+                    Toasty.info(requireContext(), getString(R.string.message_loading)).show()
+                }
+                Status.ERROR ->{
+                    Toasty.info(requireContext(), getString(R.string.message_loading)).show()
+                }
+            }
         })
     }
 }
