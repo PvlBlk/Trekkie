@@ -2,22 +2,19 @@ package com.sevenzeroes.trekkieapp.core.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.sevenzeroes.trekkieapp.R
-import com.sevenzeroes.trekkieapp.databinding.MainViewpagerBinding
+import com.sevenzeroes.trekkieapp.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity()  {
 
-    private var _binding: MainViewpagerBinding? = null
+    private var _binding: ActivityMainBinding? = null
 
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = MainViewpagerBinding.inflate(layoutInflater)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupViewPager()
@@ -25,7 +22,7 @@ class MainActivity : AppCompatActivity()  {
     }
 
     private fun setupViewPager(){
-        binding.vpMain.adapter = ScreenSlidePagerAdapter(this)
+        binding.vpMain.adapter = ScreenSlideAdapter(this)
         binding.vpMain.isUserInputEnabled = false
     }
 
@@ -47,17 +44,5 @@ class MainActivity : AppCompatActivity()  {
     private fun openFavourites(){
         binding.vpMain.currentItem = 1
     }
-
-    private inner class ScreenSlidePagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
-        override fun getItemCount(): Int = 2
-
-        override fun createFragment(position: Int): Fragment {
-           return when(position){
-                0 -> EpisodesFragment()
-               else -> FavouritesFragment()
-           }
-        }
-    }
-
 
 }

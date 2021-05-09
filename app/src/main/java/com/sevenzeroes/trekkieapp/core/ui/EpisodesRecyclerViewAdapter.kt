@@ -30,10 +30,13 @@ class EpisodesRecyclerViewAdapter : RecyclerView.Adapter<EpisodesRecyclerViewAda
         val episode = episodes[position]
         val binding = holder.binding
 
-        binding.tvTitle.text = episode.name
-        binding.tvEpisodeSummary.text = episode.overview
-        binding.tvAirDate.text = episode.air_date
-        binding.tvRating.text = episode.vote_average.toString()
+        binding.apply {
+            tvTitle.text = episode.name
+            tvEpisodeSummary.text = episode.overview
+            tvAirDate.text = episode.air_date
+            tvRating.text = episode.vote_average.toString()
+        }
+
             //        binding.tvRating.setTextColor(getColor(binding.root.context, pickColor(episode.vote_average)))
 
         val seasonEpisodePlaceholder = "s0" + episode.season_number + "e" + episode.episode_number

@@ -1,11 +1,10 @@
-package com.sevenzeroes.trekkieapp.core.domain.framework
+package com.sevenzeroes.trekkieapp.core.domain.repository
 
 import com.google.gson.JsonElement
 import com.sevenzeroes.trekkieapp.core.domain.NetworkService
-import com.sevenzeroes.trekkieapp.core.domain.repository.DataSource
 import retrofit2.Response
 
-class RemoteDataSource : DataSource {
+class RemoteDataSourceImpl : RemoteDataSource {
 
     var stapi = NetworkService.stapiRetrofitService()
     var movieApi = NetworkService.tmdbRetrofitService()
