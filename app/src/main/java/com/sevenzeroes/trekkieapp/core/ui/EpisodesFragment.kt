@@ -1,30 +1,28 @@
 package com.sevenzeroes.trekkieapp.core.ui
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sevenzeroes.trekkieapp.R
-import com.sevenzeroes.trekkieapp.core.helpers.Event
 import com.sevenzeroes.trekkieapp.core.helpers.Status
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.launch
 
-class EpisodesFragment : Fragment() {
+class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
-    private lateinit var episodesViewModel: EpisodesViewModel
-    private lateinit var binding: EpisodesFragmentBinding
+    private val episodesViewModel: EpisodesViewModel by viewModels()
+    private var _binding: EpisodesFragmentBinding? = null
+    private val binding get() = _binding!!
     private lateinit var adapter: EpisodesRecyclerViewAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = EpisodesFragmentBinding.inflate(layoutInflater, container, false)
-        episodesViewModel = ViewModelProvider(this).get(EpisodesViewModel::class.java)
+        _binding = EpisodesFragmentBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -34,6 +32,7 @@ class EpisodesFragment : Fragment() {
 
         setupEpisodesList()
         observeEpisodes()
+        initSwipeListener()
         viewLifecycleOwner.lifecycleScope.launch {
         episodesViewModel.getEpisodes("data")
         }
@@ -48,16 +47,33 @@ class EpisodesFragment : Fragment() {
         episodesViewModel.episodes.observe(viewLifecycleOwner, {
             when (it.status){
                 Status.SUCCESS -> {
+                    binding.srlEpisodes.isRefreshing = false
                     if (it.data!=null)
                     adapter.setData(it.data)
                 }
                 Status.LOADING -> {
-                    Toasty.info(requireContext(), getString(R.string.message_loading)).show()
+                    binding.srlEpisodes.isRefreshing = true
                 }
                 Status.ERROR ->{
+                    binding.srlEpisodes.isRefreshing = false
                     Toasty.info(requireContext(), getString(R.string.message_loading)).show()
                 }
             }
         })
+    }
+
+    private fun initSwipeListener(){
+        binding.srlEpisodes.setOnRefreshListener(this);
+    }
+
+    override fun onRefresh() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            episodesViewModel.getEpisodes("best of")
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

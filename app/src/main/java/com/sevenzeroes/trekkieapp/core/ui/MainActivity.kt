@@ -45,4 +45,9 @@ class MainActivity : AppCompatActivity()  {
         binding.vpMain.currentItem = 1
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
 }

@@ -14,6 +14,6 @@ class EpisodeDiffUtilCallback(var oldList: List<EpisodeSummary>, var newList: Li
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].still_path == newList[newItemPosition].still_path
+        return oldList[oldItemPosition].still_path == newList[newItemPosition].still_path && oldList[oldItemPosition].overview == newList[newItemPosition].overview
     }
 }

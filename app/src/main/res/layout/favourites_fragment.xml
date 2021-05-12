@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/srlFavorites"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".core.ui.FavouritesFragment">
+    tools:context=".core.ui.EpisodesFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFavoritesList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Favorites" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

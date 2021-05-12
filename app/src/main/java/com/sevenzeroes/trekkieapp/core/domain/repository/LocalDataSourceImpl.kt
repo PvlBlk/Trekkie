@@ -12,11 +12,11 @@ class LocalDataSourceImpl : LocalDataSource {
         EpisodesDatabase::class.java, "database-name"
     ).build()
 
-    override suspend fun searchEpisodesInDb(title: String?): EpisodeSummary {
+    override suspend fun searchEpisodesInDb(title: String?): List<EpisodeSummary> {
         return dataBase.EpisodesDao().searchEpisodesInDb(title)
     }
 
-    override suspend fun getAllEpisodesFromDb(): EpisodeSummary {
+    override suspend fun getAllEpisodesFromDb(): List<EpisodeSummary> {
         return dataBase.EpisodesDao().getAllEpisodesFromDb()
     }
 

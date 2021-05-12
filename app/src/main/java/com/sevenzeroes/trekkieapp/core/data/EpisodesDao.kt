@@ -2,6 +2,7 @@ package com.sevenzeroes.trekkieapp.core.data
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 
@@ -9,12 +10,12 @@ import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 interface EpisodesDao {
 
     @Query("SELECT * FROM EpisodeSummary WHERE name LIKE :title")
-    suspend fun searchEpisodesInDb(title: String?): EpisodeSummary
+    suspend fun searchEpisodesInDb(title: String?): List<EpisodeSummary>
 
     @Query("SELECT * FROM EpisodeSummary")
-    suspend fun getAllEpisodesFromDb() : EpisodeSummary
+    suspend fun getAllEpisodesFromDb() : List<EpisodeSummary>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg episodes: EpisodeSummary)
 
 }

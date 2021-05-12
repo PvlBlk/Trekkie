@@ -14,9 +14,9 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class EpisodesRecyclerViewAdapter(private val episodesViewModel: EpisodesViewModel) : RecyclerView.Adapter<EpisodesRecyclerViewAdapter.ViewHolder>() {
+class EpisodesRecyclerViewAdapter(private val toggleFavourite: ToggleFavourite) : RecyclerView.Adapter<EpisodesRecyclerViewAdapter.ViewHolder>() {
 
-    private var episodes = listOf<EpisodeSummary>()
+    private var episodes = mutableListOf<EpisodeSummary>()
 
     companion object{
         const val IMAGES_BASE_URL = "https://image.tmdb.org/t/p/w500"
@@ -48,7 +48,7 @@ class EpisodesRecyclerViewAdapter(private val episodesViewModel: EpisodesViewMod
             }
             ivFavorite.setOnClickListener {
                 GlobalScope.launch {
-                    episodesViewModel.interactors?.insert?.invoke(episode)
+                    toggleFavourite.onToggle(episode)
                 }
             }
         }
@@ -78,7 +78,8 @@ class EpisodesRecyclerViewAdapter(private val episodesViewModel: EpisodesViewMod
     fun setData(newEpisodes: MutableList<EpisodeSummary>){
         val diffUtilCallback = EpisodeDiffUtilCallback(episodes, newEpisodes)
         val diffResult = DiffUtil.calculateDiff(diffUtilCallback)
-        episodes = newEpisodes
+        episodes.clear()
+        episodes.addAll(newEpisodes)
         diffResult.dispatchUpdatesTo(this)
     }
 }
