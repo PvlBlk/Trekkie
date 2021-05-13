@@ -3,7 +3,7 @@ package com.sevenzeroes.trekkieapp.core.domain.models
 /**
  * This is from TMDB
  */
-data class EpisodeEntity(
+data class TmdbResponse(
     val air_date: String,
     val crew: List<Crew>,
     val episode_number: Int,

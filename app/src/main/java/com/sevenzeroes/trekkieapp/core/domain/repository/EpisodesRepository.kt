@@ -1,16 +1,20 @@
 package com.sevenzeroes.trekkieapp.core.domain.repository
 
-import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeEntity
+import com.sevenzeroes.trekkieapp.core.domain.models.TmdbResponse
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
-import com.sevenzeroes.trekkieapp.core.domain.models.ResponseEntity
+import com.sevenzeroes.trekkieapp.core.domain.models.StapiResponse
 import retrofit2.Response
 
 class EpisodesRepository(private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource) {
+
+   suspend fun  getSummaries(query: String?)
+   : MutableList<EpisodeSummary> = remoteDataSource.getSummaries(query)
+
    suspend fun  getEpisodeSpecifics(seasonNumber: Int, episodeNumber: Int)
-   : Response<EpisodeEntity> = remoteDataSource.getEpisodeSpecifics(seasonNumber, episodeNumber)
+   : TmdbResponse = remoteDataSource.getEpisodeSpecifics(seasonNumber, episodeNumber)
 
    suspend fun  searchEpisodesByTitle(title: String?)
-   : Response<ResponseEntity> = remoteDataSource.searchEpisodesByTitle(title)
+   : StapiResponse = remoteDataSource.searchEpisodesByTitle(title)
 
    suspend fun searchEpisodesInDb(title: String?) = localDataSource.searchEpisodesInDb(title)
 

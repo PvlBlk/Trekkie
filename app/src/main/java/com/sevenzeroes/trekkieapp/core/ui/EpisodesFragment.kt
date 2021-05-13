@@ -34,7 +34,7 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         observeEpisodes()
         initSwipeListener()
         viewLifecycleOwner.lifecycleScope.launch {
-        episodesViewModel.getEpisodes("data")
+            episodesViewModel.getSummaries("frame")
         }
     }
 
@@ -56,7 +56,7 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 }
                 Status.ERROR ->{
                     binding.srlEpisodes.isRefreshing = false
-                    Toasty.info(requireContext(), getString(R.string.message_loading)).show()
+                    Toasty.error(requireContext(), it.status.name).show()
                 }
             }
         })
@@ -68,7 +68,7 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onRefresh() {
         viewLifecycleOwner.lifecycleScope.launch {
-            episodesViewModel.getEpisodes("best of")
+            episodesViewModel.getSummaries("chain")
         }
     }
 

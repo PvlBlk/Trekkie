@@ -4,7 +4,7 @@ package com.sevenzeroes.trekkieapp.core.domain.models
  * This is from Stapi
  */
 
-data class ResponseEntity(
+data class StapiResponse(
     val episodes: List<Episode>,
     val page: Page,
     val sort: Sort

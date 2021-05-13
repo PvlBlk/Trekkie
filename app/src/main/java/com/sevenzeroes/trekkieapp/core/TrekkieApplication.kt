@@ -22,6 +22,7 @@ class TrekkieApplication : Application() {
         val episodesRepository = EpisodesRepository(RemoteDataSourceImpl(), LocalDataSourceImpl())
 
         interactors = Interactors(
+            GetSummaries(episodesRepository),
             GetEpisodeSpecifics(episodesRepository),
             SearchEpisodes(episodesRepository),
             SearchEpisodesInDb(episodesRepository),

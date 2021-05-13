@@ -6,27 +6,13 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.sevenzeroes.trekkieapp.core.domain.models.Episode
-import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeEntity
-import com.sevenzeroes.trekkieapp.core.domain.models.ResponseEntity
+import com.sevenzeroes.trekkieapp.core.domain.models.TmdbResponse
+import com.sevenzeroes.trekkieapp.core.domain.models.StapiResponse
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 object Utils {
-
-    fun parseEpisodeJson(response : JsonElement?) : List<Episode>? {
-        response as JsonObject?
-        val result = Gson().fromJson(response, ResponseEntity::class.java)
-        Log.d("Utils::", "" + result.toString())
-        return result.episodes
-    }
-
-    fun parseSpecificJson(response : JsonElement?) : EpisodeEntity? {
-        response as JsonObject?
-        val result : EpisodeEntity? = Gson().fromJson(response, EpisodeEntity::class.java)
-        Log.d("Utils::", "" + result.toString())
-        return result
-    }
 
     fun parseDateFormat(dateString: String?): String? {
         if (Build.VERSION.SDK_INT >= 26) {

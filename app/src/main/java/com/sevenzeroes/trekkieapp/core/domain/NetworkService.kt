@@ -17,12 +17,12 @@ object NetworkService {
             .create(Stapi::class.java)
     }
 
-    fun tmdbRetrofitService(): MovieApi {
+    fun tmdbRetrofitService(): TmdbApi {
         return Retrofit.Builder()
             .baseUrl(TMDB_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(MovieApi::class.java)
+            .create(TmdbApi::class.java)
     }
 
 }
