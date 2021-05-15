@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-object Utils {
+object TimeUtils {
 
     fun parseDateFormat(dateString: String?): String? {
         if (Build.VERSION.SDK_INT >= 26) {

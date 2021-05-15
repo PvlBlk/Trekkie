@@ -5,7 +5,7 @@ import com.sevenzeroes.trekkieapp.core.domain.models.Episode
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.domain.models.StapiResponse
 import com.sevenzeroes.trekkieapp.core.domain.models.TmdbResponse
-import com.sevenzeroes.trekkieapp.core.helpers.Utils
+import com.sevenzeroes.trekkieapp.core.helpers.TimeUtils
 
 class RemoteDataSourceImpl : RemoteDataSource {
 
@@ -18,7 +18,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
         val list: List<Episode> = stapiResponse.episodes
         list.forEach {
             val tmdbResponse = getEpisodeSpecifics(it.seasonNumber, it.episodeNumber)
-            val parsedDate : String? = Utils.parseDateFormat(tmdbResponse.air_date)
+            val parsedDate : String? = TimeUtils.parseDateFormat(tmdbResponse.air_date)
             val episodeSummary = EpisodeSummary(parsedDate, tmdbResponse.name!!,
                 tmdbResponse.overview, tmdbResponse.season_number, tmdbResponse.episode_number,
                 tmdbResponse.vote_average,

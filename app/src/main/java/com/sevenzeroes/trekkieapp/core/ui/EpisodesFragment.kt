@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.sevenzeroes.trekkieapp.R
 import com.sevenzeroes.trekkieapp.core.helpers.Status
+import com.sevenzeroes.trekkieapp.core.ui.viewModels.EpisodesViewModel
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.launch
@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private val episodesViewModel: EpisodesViewModel by viewModels()
+
     private var _binding: EpisodesFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: EpisodesRecyclerViewAdapter
@@ -63,12 +64,12 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun initSwipeListener(){
-        binding.srlEpisodes.setOnRefreshListener(this);
+        binding.srlEpisodes.setOnRefreshListener(this)
     }
 
     override fun onRefresh() {
         viewLifecycleOwner.lifecycleScope.launch {
-            episodesViewModel.getSummaries("chain")
+            episodesViewModel.getSummaries("lessons")
         }
     }
 

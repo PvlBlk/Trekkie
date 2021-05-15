@@ -10,10 +10,10 @@ import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 interface EpisodesDao {
 
     @Query("SELECT * FROM EpisodeSummary WHERE name LIKE :title")
-    suspend fun searchEpisodesInDb(title: String?): List<EpisodeSummary>
+    suspend fun searchEpisodesInDb(title: String?): MutableList<EpisodeSummary>
 
     @Query("SELECT * FROM EpisodeSummary")
-    suspend fun getAllEpisodesFromDb() : List<EpisodeSummary>
+    suspend fun getAllEpisodesFromDb() : MutableList<EpisodeSummary>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg episodes: EpisodeSummary)
