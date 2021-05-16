@@ -6,14 +6,31 @@
     android:id="@+id/srlEpisodes"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".core.ui.EpisodesFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEpisodeList"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+        android:orientation="vertical">
+        <com.arlib.floatingsearchview.FloatingSearchView
+            android:id="@+id/svEpisodes"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/searchView_height"
+            android:backgroundTint="@color/white"
+            app:floatingSearch_searchHint="@string/search_hint">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        </com.arlib.floatingsearchview.FloatingSearchView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvEpisodeList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

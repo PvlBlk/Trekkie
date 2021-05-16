@@ -8,13 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.arlib.floatingsearchview.FloatingSearchView
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.sevenzeroes.trekkieapp.core.helpers.Status
 import com.sevenzeroes.trekkieapp.core.ui.viewModels.EpisodesViewModel
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.launch
 
-class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, FloatingSearchView.OnSearchListener {
 
     private val episodesViewModel: EpisodesViewModel by viewModels()
 
@@ -27,16 +29,14 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupEpisodesList()
         observeEpisodes()
         initSwipeListener()
-        viewLifecycleOwner.lifecycleScope.launch {
-            episodesViewModel.getSummaries("frame")
-        }
+        initSearchListener()
+
     }
 
     private fun setupEpisodesList(){
@@ -67,14 +67,26 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         binding.srlEpisodes.setOnRefreshListener(this)
     }
 
+    private fun initSearchListener(){
+        binding.svEpisodes.setOnSearchListener(this)
+    }
+
     override fun onRefresh() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            episodesViewModel.getSummaries("lessons")
-        }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onSuggestionClicked(searchSuggestion: SearchSuggestion?) {
+
+    }
+
+    override fun onSearchAction(currentQuery: String?) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            episodesViewModel.getSummaries(currentQuery)
+        }
     }
 }

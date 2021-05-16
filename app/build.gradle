@@ -78,4 +78,7 @@ dependencies {
     //Skelly
     implementation 'com.dpforge:skelly:1.0.1'
 
+    //Persistent searchView
+    implementation 'com.github.arimorty:floatingsearchview:2.1.1'
+
 }
