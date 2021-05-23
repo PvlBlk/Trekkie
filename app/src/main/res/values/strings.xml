@@ -12,5 +12,15 @@
     <string name="no_connection">Please, check your Internet connection</string>
     <string name="air_date">Aired</string>
     <string name="use_search">Use search…</string>
+    <string name="list_bnv_item">Episodes</string>
+    <string name="favourite_bnv_item">Favourite</string>
+    <string name="title_example">Measure of a man</string>
+    <string name="season_episode_example">s01e01</string>
+    <string name="rating_example">10/10</string>
+    <string name="air_date_example">July 11, 1990</string>
+    <string name="overview_example">When the USS Enterprise arrives at a newly-established Starbase, Data is ordered to serve Captain Bruce Maddox, who wishes to disassemble Data to study him. When Data learns that Maddox may not be able to reassemble him, he refuses and Picard is enlisted to defend his rights in court.</string>
+
+    <string name="message_loading">Loading</string>
+    <string name="message_error">Error</string>
 
 </resources>

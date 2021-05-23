@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bnvListItem"
+        android:title="@string/list_bnv_item"
+        android:icon="@drawable/ic_baseline_list_24">
+    </item>
+    <item
+        android:id="@+id/bnvFavouriteItem"
+        android:title="@string/favourite_bnv_item"
+        android:icon="@drawable/ic_baseline_favorite_24">
+    </item>
+</menu>
