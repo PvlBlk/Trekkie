@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.core.ui
+package com.sevenzeroes.trekkieapp.core.ui.helpers
 
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 

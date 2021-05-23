@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".core.ui.EpisodesFragment">
+    tools:context=".core.ui.fragment.EpisodesFragment">
 
 
     <LinearLayout

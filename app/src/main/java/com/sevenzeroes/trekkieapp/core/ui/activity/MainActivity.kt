@@ -1,8 +1,9 @@
-package com.sevenzeroes.trekkieapp.core.ui
+package com.sevenzeroes.trekkieapp.core.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.sevenzeroes.trekkieapp.R
+import com.sevenzeroes.trekkieapp.core.ui.helpers.MainViewPagerAdapter
 import com.sevenzeroes.trekkieapp.databinding.ActivityMainBinding
 
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity()  {
     }
 
     private fun setupViewPager(){
-        binding.vpMain.adapter = ScreenSlideAdapter(this)
+        binding.vpMain.adapter = MainViewPagerAdapter(this)
         binding.vpMain.isUserInputEnabled = false
     }
 

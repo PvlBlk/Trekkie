@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.core.ui
+package com.sevenzeroes.trekkieapp.core.ui.helpers
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class EpisodesRecyclerViewAdapter(private val toggleFavourite: ToggleFavourite) : RecyclerView.Adapter<EpisodesRecyclerViewAdapter.ViewHolder>() {
+class EpisodesAdapter(private val toggleFavourite: ToggleFavourite, private var isExpanded: Boolean) : RecyclerView.Adapter<EpisodesAdapter.ViewHolder>() {
 
     private var episodes = mutableListOf<EpisodeSummary>()
 
@@ -54,7 +54,7 @@ class EpisodesRecyclerViewAdapter(private val toggleFavourite: ToggleFavourite) 
         }
             //        binding.tvRating.setTextColor(getColor(binding.root.context, pickColor(episode.vote_average)))
 
-        Glide.with(binding.ivStill.context).load(IMAGES_BASE_URL+episode.still_path).centerCrop().into(binding.ivStill)
+        Glide.with(binding.ivStill.context).load(IMAGES_BASE_URL +episode.still_path).centerCrop().into(binding.ivStill)
 
 
     }

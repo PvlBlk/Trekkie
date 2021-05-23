@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.core.ui
+package com.sevenzeroes.trekkieapp.core.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.sevenzeroes.trekkieapp.core.helpers.Status
+import com.sevenzeroes.trekkieapp.core.ui.helpers.EpisodesAdapter
 import com.sevenzeroes.trekkieapp.core.ui.viewModels.EpisodesViewModel
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
 import es.dmoral.toasty.Toasty
@@ -22,7 +23,7 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Float
 
     private var _binding: EpisodesFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: EpisodesRecyclerViewAdapter
+    private lateinit var adapter: EpisodesAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = EpisodesFragmentBinding.inflate(layoutInflater, container, false)
@@ -40,7 +41,7 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Float
     }
 
     private fun setupEpisodesList(){
-        adapter = EpisodesRecyclerViewAdapter(episodesViewModel)
+        adapter = EpisodesAdapter(episodesViewModel, true )
         binding.rvEpisodeList.adapter = adapter
     }
 
@@ -72,7 +73,9 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Float
     }
 
     override fun onRefresh() {
-
+        viewLifecycleOwner.lifecycleScope.launch {
+            episodesViewModel.getSummaries(binding.svEpisodes.query)
+        }
     }
 
     override fun onDestroyView() {

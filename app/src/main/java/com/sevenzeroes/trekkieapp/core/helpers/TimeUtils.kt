@@ -1,13 +1,6 @@
 package com.sevenzeroes.trekkieapp.core.helpers
 
 import android.os.Build
-import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
-import com.sevenzeroes.trekkieapp.core.domain.models.Episode
-import com.sevenzeroes.trekkieapp.core.domain.models.TmdbResponse
-import com.sevenzeroes.trekkieapp.core.domain.models.StapiResponse
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -26,8 +19,7 @@ object TimeUtils {
         } else {
             val parser = SimpleDateFormat("yyyy-MM-dd")
             val formatter = SimpleDateFormat("d MMM uuuu")
-            val formattedDate = formatter.format(parser.parse(dateString))
-            return formattedDate
+            return formatter.format(parser.parse(dateString))
         }
     }
 }

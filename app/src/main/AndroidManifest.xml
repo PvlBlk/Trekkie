@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sevenzeroes.trekkieapp.core.ui.MainActivity"
+            android:name="com.sevenzeroes.trekkieapp.core.ui.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

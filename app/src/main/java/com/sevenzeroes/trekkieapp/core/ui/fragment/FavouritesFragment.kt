@@ -1,4 +1,4 @@
-package com.sevenzeroes.trekkieapp.core.ui
+package com.sevenzeroes.trekkieapp.core.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,13 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.helpers.Status
+import com.sevenzeroes.trekkieapp.core.ui.helpers.EpisodesAdapter
 import com.sevenzeroes.trekkieapp.core.ui.viewModels.FavouritesViewModel
 import com.sevenzeroes.trekkieapp.databinding.FavouritesFragmentBinding
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FavouritesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
@@ -24,7 +24,7 @@ class FavouritesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     private var _binding: FavouritesFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: EpisodesRecyclerViewAdapter
+    private lateinit var adapter: EpisodesAdapter
 
     var episodes = mutableListOf<EpisodeSummary>()
 
@@ -43,7 +43,7 @@ class FavouritesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun setupFavoritesList(){
-        adapter = EpisodesRecyclerViewAdapter(favouritesViewModel)
+        adapter = EpisodesAdapter(favouritesViewModel, false)
         binding.rvFavoritesList.adapter = adapter
     }
 
