@@ -1,7 +1,7 @@
 package com.sevenzeroes.trekkieapp.core
 
 import android.app.Application
-import com.sevenzeroes.trekkieapp.core.domain.framework.Interactors
+import com.sevenzeroes.trekkieapp.core.domain.interactors.Interactors
 import com.sevenzeroes.trekkieapp.core.domain.interactors.*
 import com.sevenzeroes.trekkieapp.core.domain.repository.RemoteDataSourceImpl
 import com.sevenzeroes.trekkieapp.core.domain.repository.EpisodesRepository

@@ -11,6 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.sevenzeroes.trekkieapp.core.helpers.Status
+import com.sevenzeroes.trekkieapp.core.helpers.isValid
 import com.sevenzeroes.trekkieapp.core.ui.helpers.EpisodesAdapter
 import com.sevenzeroes.trekkieapp.core.ui.viewModels.EpisodesViewModel
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
@@ -88,6 +89,7 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Float
     }
 
     override fun onSearchAction(currentQuery: String?) {
+        if (currentQuery.isValid())
         viewLifecycleOwner.lifecycleScope.launch {
             episodesViewModel.getSummaries(currentQuery)
         }
