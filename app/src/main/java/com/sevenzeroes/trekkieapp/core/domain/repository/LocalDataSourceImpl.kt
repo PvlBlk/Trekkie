@@ -21,6 +21,7 @@ class LocalDataSourceImpl : LocalDataSource {
     }
 
     override suspend fun insert(vararg episodes: EpisodeSummary) {
+        episodes.forEach { it.isFavorite=true }
         dataBase.EpisodesDao().insert(*episodes)
     }
 }

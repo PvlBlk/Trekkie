@@ -2,6 +2,7 @@ package com.sevenzeroes.trekkieapp.core.ui.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sevenzeroes.trekkieapp.core.TrekkieApplication
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.helpers.Event
@@ -15,8 +16,8 @@ class FavouritesViewModel : ViewModel(), ToggleFavourite {
     val insert = TrekkieApplication.instance?.interactors?.insert
     private val getAllEpisodesFromDb = TrekkieApplication.instance?.interactors?.getAllEpisodesFromDb
 
-    override fun onToggle(episode: EpisodeSummary) {
-        GlobalScope.launch {
+    override fun onToggleFavorite(episode: EpisodeSummary) {
+        viewModelScope.launch {
             insert?.invoke(episode)
         }
     }
