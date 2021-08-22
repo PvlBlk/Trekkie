@@ -1,4 +1,4 @@
 package com.sevenzeroes.trekkieapp.core.helpers
 
-fun String?.isValid() : Boolean =
+fun String?.isValidSearchQuery() : Boolean =
     this != null && this.trim().isNotEmpty()

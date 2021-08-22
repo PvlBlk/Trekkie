@@ -7,11 +7,14 @@ import com.sevenzeroes.trekkieapp.core.TrekkieApplication
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.helpers.Event
 import com.sevenzeroes.trekkieapp.core.ui.helpers.ToggleFavourite
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EpisodesViewModel : ViewModel(), ToggleFavourite {
+@HiltViewModel
+class EpisodesViewModel @Inject constructor() : ViewModel(), ToggleFavourite {
 
     var episodes = MutableLiveData<Event<MutableList<EpisodeSummary>>>()
     val insert = TrekkieApplication.instance?.interactors?.insert

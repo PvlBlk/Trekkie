@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sevenzeroes.trekkieapp.R
 import com.sevenzeroes.trekkieapp.core.ui.helpers.MainViewPagerAdapter
 import com.sevenzeroes.trekkieapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity()  {
 
     private var _binding: ActivityMainBinding? = null

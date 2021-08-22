@@ -6,7 +6,9 @@ import com.sevenzeroes.trekkieapp.core.domain.interactors.*
 import com.sevenzeroes.trekkieapp.core.domain.repository.RemoteDataSourceImpl
 import com.sevenzeroes.trekkieapp.core.domain.repository.EpisodesRepository
 import com.sevenzeroes.trekkieapp.core.domain.repository.LocalDataSourceImpl
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class TrekkieApplication : Application() {
 
     lateinit var interactors: Interactors

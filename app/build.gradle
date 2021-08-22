@@ -81,4 +81,9 @@ dependencies {
     //Persistent searchView
     implementation 'com.github.arimorty:floatingsearchview:2.1.1'
 
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+
 }
