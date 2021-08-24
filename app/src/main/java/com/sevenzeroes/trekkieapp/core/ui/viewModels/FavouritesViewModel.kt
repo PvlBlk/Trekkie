@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FavouritesViewModel @Inject constructor(val insert: Insert,  val getAllEpisodesFromDb: GetAllEpisodesFromDb) : ViewModel() {
 
-    private val _favoriteEpisodes = MutableStateFlow<Event<MutableList<EpisodeSummary>>>(Event.loading())
+    private val _favoriteEpisodes = MutableStateFlow<Event<MutableList<EpisodeSummary>>>(Event.error(""))
     val favoriteEpisodes: StateFlow<Event<MutableList<EpisodeSummary>>> = _favoriteEpisodes
 
     fun toggleFavorite(episode: EpisodeSummary) {

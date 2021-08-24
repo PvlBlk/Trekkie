@@ -17,7 +17,7 @@ import javax.inject.Inject
 class EpisodesViewModel @Inject constructor(val insert: Insert, val getSummaries: GetSummaries) :
     ViewModel() {
 
-    private val _episodes = MutableStateFlow<Event<MutableList<EpisodeSummary>>>(Event.loading())
+    private val _episodes = MutableStateFlow<Event<MutableList<EpisodeSummary>>>(Event.error(""))
     val episodes: StateFlow<Event<MutableList<EpisodeSummary>>> = _episodes
 
     suspend fun getSummaries(query: String?) {
