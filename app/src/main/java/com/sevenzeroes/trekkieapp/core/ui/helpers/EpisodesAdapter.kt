@@ -11,11 +11,11 @@ import com.sevenzeroes.trekkieapp.R
 import com.sevenzeroes.trekkieapp.databinding.EpisodeItemBinding
 import com.sevenzeroes.trekkieapp.core.data.EpisodeDiffUtilCallback
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
-import com.sevenzeroes.trekkieapp.core.helpers.getId
+import com.sevenzeroes.trekkieapp.core.helpers.getSeasonEpisode
 import com.sevenzeroes.trekkieapp.core.helpers.setImage
 
 
-class EpisodesAdapter(private val toggleFavourite: ToggleFavourite, private var isExpanded: Boolean) : RecyclerView.Adapter<EpisodesAdapter.ViewHolder>() {
+class EpisodesAdapter(val toggleFavorite: (EpisodeSummary) -> Unit) : RecyclerView.Adapter<EpisodesAdapter.ViewHolder>() {
 
     private var episodes = mutableListOf<EpisodeSummary>()
 
@@ -35,7 +35,7 @@ class EpisodesAdapter(private val toggleFavourite: ToggleFavourite, private var 
         val episode = episodes[position]
         val binding = holder.binding
         val isExpanded : Boolean? = episode.expanded
-        val episodeId = episode.getId()
+        val episodeId = episode.getSeasonEpisode()
 
         binding.apply {
             tvTitle.text = episode.name
@@ -52,7 +52,7 @@ class EpisodesAdapter(private val toggleFavourite: ToggleFavourite, private var 
                 notifyItemChanged(position)
             }
             ivFavorite.setOnClickListener {
-                toggleFavourite.onToggleFavorite(episode)
+                toggleFavorite(episode)
             }
             tvRating.setTextColor(getColor(binding.root.context, pickRatingColor(episode.vote_average)))
         }

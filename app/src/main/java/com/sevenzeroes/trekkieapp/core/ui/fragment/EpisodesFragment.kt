@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
+import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.helpers.Status
 import com.sevenzeroes.trekkieapp.core.helpers.isValidSearchQuery
 import com.sevenzeroes.trekkieapp.core.ui.helpers.EpisodesAdapter
@@ -43,8 +44,12 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Float
     }
 
     private fun setupEpisodesList(){
-        adapter = EpisodesAdapter(episodesViewModel, true )
+        adapter = EpisodesAdapter(::toggleFavorite)
         binding.rvEpisodeList.adapter = adapter
+    }
+
+    private fun toggleFavorite(episodeSummary: EpisodeSummary) {
+        episodesViewModel.toggleFavorite(episodeSummary)
     }
 
     private fun observeEpisodes(){

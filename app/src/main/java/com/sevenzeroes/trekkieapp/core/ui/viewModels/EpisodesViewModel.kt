@@ -4,26 +4,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sevenzeroes.trekkieapp.core.TrekkieApplication
+import com.sevenzeroes.trekkieapp.core.domain.interactors.GetSummaries
+import com.sevenzeroes.trekkieapp.core.domain.interactors.Insert
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.helpers.Event
-import com.sevenzeroes.trekkieapp.core.ui.helpers.ToggleFavourite
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EpisodesViewModel @Inject constructor() : ViewModel(), ToggleFavourite {
+class EpisodesViewModel @Inject constructor(val insert: Insert, val getSummaries: GetSummaries) :
+    ViewModel() {
 
     var episodes = MutableLiveData<Event<MutableList<EpisodeSummary>>>()
-    val insert = TrekkieApplication.instance?.interactors?.insert
-    private val getSummaries = TrekkieApplication.instance?.interactors?.getSummaries
 
-    suspend fun getSummaries(query: String?){
+    suspend fun getSummaries(query: String?) {
         episodes.value = Event.loading()
-        val summaries =  getSummaries?.invoke(query)
-        if (summaries.isNullOrEmpty()){
+        val summaries = getSummaries.invoke(query)
+        if (summaries.isNullOrEmpty()) {
             episodes.value = Event.error("Ошибка")
         } else {
             episodes.value = Event.success(summaries)
@@ -31,9 +30,9 @@ class EpisodesViewModel @Inject constructor() : ViewModel(), ToggleFavourite {
 
     }
 
-    override fun onToggleFavorite(episode: EpisodeSummary) {
+    fun toggleFavorite(episode: EpisodeSummary) {
         viewModelScope.launch(Dispatchers.IO) {
-            insert?.invoke(episode)
+            insert.invoke(episode)
         }
     }
 }

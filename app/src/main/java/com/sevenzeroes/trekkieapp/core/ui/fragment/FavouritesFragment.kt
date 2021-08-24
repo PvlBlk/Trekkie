@@ -45,8 +45,12 @@ class FavouritesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun setupFavoritesList(){
-        adapter = EpisodesAdapter(favouritesViewModel, false)
+        adapter = EpisodesAdapter(::toggleFavorite)
         binding.rvFavoritesList.adapter = adapter
+    }
+
+    private fun toggleFavorite(episodeSummary: EpisodeSummary) {
+        favouritesViewModel.toggleFavorite(episodeSummary)
     }
 
     private fun observeEpisodes(){
@@ -69,7 +73,7 @@ class FavouritesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun initSwipeListener(){
-        binding.srlFavorites.setOnRefreshListener(this);
+        binding.srlFavorites.setOnRefreshListener(this)
     }
 
     private fun getAllEpisodesFromDb(){
