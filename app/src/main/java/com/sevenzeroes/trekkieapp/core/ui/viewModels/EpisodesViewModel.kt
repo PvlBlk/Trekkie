@@ -1,15 +1,15 @@
 package com.sevenzeroes.trekkieapp.core.ui.viewModels
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sevenzeroes.trekkieapp.core.TrekkieApplication
 import com.sevenzeroes.trekkieapp.core.domain.interactors.GetSummaries
 import com.sevenzeroes.trekkieapp.core.domain.interactors.Insert
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.helpers.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,15 +17,16 @@ import javax.inject.Inject
 class EpisodesViewModel @Inject constructor(val insert: Insert, val getSummaries: GetSummaries) :
     ViewModel() {
 
-    var episodes = MutableLiveData<Event<MutableList<EpisodeSummary>>>()
+    private val _episodes = MutableStateFlow<Event<MutableList<EpisodeSummary>>>(Event.loading())
+    val episodes: StateFlow<Event<MutableList<EpisodeSummary>>> = _episodes
 
     suspend fun getSummaries(query: String?) {
-        episodes.value = Event.loading()
+        _episodes.value = Event.loading()
         val summaries = getSummaries.invoke(query)
         if (summaries.isNullOrEmpty()) {
-            episodes.value = Event.error("Ошибка")
+            _episodes.value = Event.error("Ошибка")
         } else {
-            episodes.value = Event.success(summaries)
+            _episodes.value = Event.success(summaries)
         }
 
     }

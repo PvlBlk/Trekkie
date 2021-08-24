@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.arlib.floatingsearchview.FloatingSearchView
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
@@ -18,6 +20,7 @@ import com.sevenzeroes.trekkieapp.core.ui.viewModels.EpisodesViewModel
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import es.dmoral.toasty.Toasty
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -53,22 +56,26 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Float
     }
 
     private fun observeEpisodes(){
-        episodesViewModel.episodes.observe(viewLifecycleOwner, {
-            when (it.status){
-                Status.SUCCESS -> {
-                    binding.srlEpisodes.isRefreshing = false
-                    if (it.data!=null)
-                    adapter.setData(it.data)
-                }
-                Status.LOADING -> {
-                    binding.srlEpisodes.isRefreshing = true
-                }
-                Status.ERROR ->{
-                    binding.srlEpisodes.isRefreshing = false
-                    Toasty.error(requireContext(), it.status.name).show()
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED)  {
+                episodesViewModel.episodes.collect {
+                    when (it.status){
+                        Status.SUCCESS -> {
+                            binding.srlEpisodes.isRefreshing = false
+                            if (it.data!=null)
+                                adapter.setData(it.data)
+                        }
+                        Status.LOADING -> {
+                            binding.srlEpisodes.isRefreshing = true
+                        }
+                        Status.ERROR ->{
+                            binding.srlEpisodes.isRefreshing = false
+                            Toasty.error(requireContext(), it.status.name).show()
+                        }
+                    }
                 }
             }
-        })
+        }
     }
 
     private fun initSwipeListener(){

@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor() : RemoteDataSource {
 
-    var stapi = NetworkService.stapiRetrofitService()
-    var movieApi = NetworkService.tmdbRetrofitService()
+    var stapi = NetworkService.stapiRetrofitService() //fixme inject
+    var movieApi = NetworkService.tmdbRetrofitService()//fixme inject
 
     override suspend fun getSummaries(title: String?) : MutableList<EpisodeSummary> {
         val stapiResponse = searchEpisodesByTitle(title)

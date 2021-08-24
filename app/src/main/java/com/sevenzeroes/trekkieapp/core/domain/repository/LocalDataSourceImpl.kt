@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class LocalDataSourceImpl @Inject constructor(): LocalDataSource {
 
-    private val dataBase = Room.databaseBuilder(
+    private val dataBase = Room.databaseBuilder( //fixme inject
         TrekkieApplication.instance?.applicationContext!!,
         EpisodesDatabase::class.java, "database-name"
     ).fallbackToDestructiveMigration().build()
