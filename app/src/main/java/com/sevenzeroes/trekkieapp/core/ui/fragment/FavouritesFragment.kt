@@ -18,7 +18,6 @@ import com.sevenzeroes.trekkieapp.databinding.FavouritesFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -72,7 +71,6 @@ class FavouritesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                         }
                         Status.ERROR ->{
                             binding.srlFavorites.isRefreshing = false
-                            Toasty.error(requireContext(), it.status.name).show()
                         }
                     }
                 }

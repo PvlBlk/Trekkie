@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
-import com.bumptech.glide.Glide
 import com.sevenzeroes.trekkieapp.R
 import com.sevenzeroes.trekkieapp.databinding.EpisodeItemBinding
 import com.sevenzeroes.trekkieapp.core.data.EpisodeDiffUtilCallback
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.helpers.getSeasonEpisode
-import com.sevenzeroes.trekkieapp.core.helpers.setImage
+import com.sevenzeroes.trekkieapp.core.helpers.loadFromUrl
 
 
 class EpisodesAdapter(val toggleFavorite: (EpisodeSummary) -> Unit) : RecyclerView.Adapter<EpisodesAdapter.ViewHolder>() {
@@ -44,7 +43,7 @@ class EpisodesAdapter(val toggleFavorite: (EpisodeSummary) -> Unit) : RecyclerVi
             tvRating.text = episode.vote_average.toString()
             tvSeasonEpisode.text = episodeId
             val favoriteIcon = if (episode.isFavorite == true) R.drawable.ic_favorite_filled else R.drawable.ic_favorite_empty
-            ivFavorite.setImage(favoriteIcon) //todo при поиске подставлять корректный значок избранного
+            ivFavorite.setImageResource(favoriteIcon) //todo при поиске подставлять корректный значок избранного
 
             clExpandable.visibility = if (isExpanded!!) View.VISIBLE else View.GONE
             clEpisodeTop.setOnClickListener{
@@ -57,9 +56,7 @@ class EpisodesAdapter(val toggleFavorite: (EpisodeSummary) -> Unit) : RecyclerVi
             tvRating.setTextColor(getColor(binding.root.context, pickRatingColor(episode.vote_average)))
         }
 
-
-        Glide.with(binding.ivStill.context).load(IMAGES_BASE_URL +episode.still_path).centerCrop().into(binding.ivStill)
-
+        binding.ivStill.loadFromUrl(IMAGES_BASE_URL +episode.still_path)
 
     }
 

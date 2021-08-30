@@ -1,16 +1,12 @@
 package com.sevenzeroes.trekkieapp.core.helpers
 
-import android.view.View
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-fun View.hide(){
-    this.visibility = View.GONE
-}
-fun View.show(){
-    this.visibility = View.VISIBLE
-}
 
-fun ImageView.setImage(favoriteIcon: Int) {
-    this.setImageDrawable(ContextCompat.getDrawable(this.context, favoriteIcon))
-}
+fun ImageView.loadFromUrl(url: String) =
+    Glide.with(this.context.applicationContext)
+        .load(url)
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .into(this)

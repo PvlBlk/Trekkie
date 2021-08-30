@@ -70,7 +70,6 @@ class EpisodesFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener, Float
                         }
                         Status.ERROR ->{
                             binding.srlEpisodes.isRefreshing = false
-                            Toasty.error(requireContext(), it.status.name).show()
                         }
                     }
                 }
