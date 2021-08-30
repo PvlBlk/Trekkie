@@ -4,22 +4,24 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.DiffUtil
-import com.bumptech.glide.Glide
 import com.sevenzeroes.trekkieapp.R
 import com.sevenzeroes.trekkieapp.databinding.EpisodeItemBinding
 import com.sevenzeroes.trekkieapp.core.data.EpisodeDiffUtilCallback
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.sevenzeroes.trekkieapp.core.helpers.getSeasonEpisode
+import com.sevenzeroes.trekkieapp.core.helpers.loadFromUrl
 
 
-class EpisodesAdapter(private val toggleFavourite: ToggleFavourite, private var isExpanded: Boolean) : RecyclerView.Adapter<EpisodesAdapter.ViewHolder>() {
+class EpisodesAdapter(val toggleFavorite: (EpisodeSummary) -> Unit) : RecyclerView.Adapter<EpisodesAdapter.ViewHolder>() {
 
     private var episodes = mutableListOf<EpisodeSummary>()
 
     companion object{
         const val IMAGES_BASE_URL = "https://image.tmdb.org/t/p/w500"
+        val LOW_RATING_RANGE = 0..4
+        val MEDIUM_RATING_RANGE = 4..6
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,37 +34,40 @@ class EpisodesAdapter(private val toggleFavourite: ToggleFavourite, private var 
         val episode = episodes[position]
         val binding = holder.binding
         val isExpanded : Boolean? = episode.expanded
-        val seasonEpisodePlaceholder = "s0" + episode.season_number + "e" + episode.episode_number
+        val episodeId = episode.getSeasonEpisode()
 
         binding.apply {
             tvTitle.text = episode.name
             tvEpisodeSummary.text = episode.overview
             tvAirDate.text = episode.air_date
             tvRating.text = episode.vote_average.toString()
-            tvSeasonEpisode.text = seasonEpisodePlaceholder
+            tvSeasonEpisode.text = episodeId
+            val favoriteIcon = if (episode.isFavorite == true) R.drawable.ic_favorite_filled else R.drawable.ic_favorite_empty
+            ivFavorite.setImageResource(favoriteIcon) //todo при поиске подставлять корректный значок избранного
 
             clExpandable.visibility = if (isExpanded!!) View.VISIBLE else View.GONE
             clEpisodeTop.setOnClickListener{
-                episode.expanded = !episode.expanded!!
+                expand(episode)
                 notifyItemChanged(position)
             }
             ivFavorite.setOnClickListener {
-                GlobalScope.launch {
-                    toggleFavourite.onToggle(episode)
-                }
+                toggleFavorite(episode)
             }
+            tvRating.setTextColor(getColor(binding.root.context, pickRatingColor(episode.vote_average)))
         }
-            //        binding.tvRating.setTextColor(getColor(binding.root.context, pickColor(episode.vote_average)))
 
-        Glide.with(binding.ivStill.context).load(IMAGES_BASE_URL +episode.still_path).centerCrop().into(binding.ivStill)
-
+        binding.ivStill.loadFromUrl(IMAGES_BASE_URL +episode.still_path)
 
     }
 
-    private fun pickColor(vote : Double?) : Int {
-        return when (vote?.toInt()!!) {
-            in 0..4 -> R.color.rating_red
-            in 4..6 -> R.color.rating_yellow
+    private fun expand(episode: EpisodeSummary) {
+        episode.expanded = !episode.expanded!!
+    }
+
+    private fun pickRatingColor(vote : Double?) : Int {
+        return when (vote?.toInt()) {
+            in LOW_RATING_RANGE -> R.color.rating_red
+            in MEDIUM_RATING_RANGE -> R.color.rating_yellow
             else -> {
                 R.color.rating_green
             }
@@ -83,3 +88,4 @@ class EpisodesAdapter(private val toggleFavourite: ToggleFavourite, private var 
         diffResult.dispatchUpdatesTo(this)
     }
 }
+

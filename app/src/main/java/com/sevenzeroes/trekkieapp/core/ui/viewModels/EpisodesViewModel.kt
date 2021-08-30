@@ -1,35 +1,39 @@
 package com.sevenzeroes.trekkieapp.core.ui.viewModels
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sevenzeroes.trekkieapp.core.TrekkieApplication
+import androidx.lifecycle.viewModelScope
+import com.sevenzeroes.trekkieapp.core.domain.interactors.GetSummaries
+import com.sevenzeroes.trekkieapp.core.domain.interactors.Insert
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.helpers.Event
-import com.sevenzeroes.trekkieapp.core.ui.helpers.ToggleFavourite
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EpisodesViewModel : ViewModel(), ToggleFavourite {
+@HiltViewModel
+class EpisodesViewModel @Inject constructor(val insert: Insert, val getSummaries: GetSummaries) :
+    ViewModel() {
 
-    var episodes = MutableLiveData<Event<MutableList<EpisodeSummary>>>()
-    val insert = TrekkieApplication.instance?.interactors?.insert
-    private val getSummaries = TrekkieApplication.instance?.interactors?.getSummaries
+    private val _episodes = MutableStateFlow<Event<MutableList<EpisodeSummary>>>(Event.error(""))
+    val episodes: StateFlow<Event<MutableList<EpisodeSummary>>> = _episodes
 
-    suspend fun getSummaries(query: String?){
-        episodes.value = Event.loading()
-        val summaries =  getSummaries?.invoke(query)
-        if (summaries.isNullOrEmpty()){
-            episodes.value = Event.error("Ошибка")
+    suspend fun getSummaries(query: String?) {
+        _episodes.value = Event.loading()
+        val summaries = getSummaries.invoke(query)
+        if (summaries.isNullOrEmpty()) {
+            _episodes.value = Event.error("Ошибка")
         } else {
-            episodes.value = Event.success(summaries!!)
+            _episodes.value = Event.success(summaries)
         }
 
     }
 
-    override fun onToggle(episode: EpisodeSummary) {
-        GlobalScope.launch(Dispatchers.IO) {
-            insert?.invoke(episode)
+    fun toggleFavorite(episode: EpisodeSummary) {
+        viewModelScope.launch(Dispatchers.IO) {
+            insert.invoke(episode)
         }
     }
 }

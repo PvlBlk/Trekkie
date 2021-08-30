@@ -2,11 +2,15 @@ package com.sevenzeroes.trekkieapp.core.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.setPadding
+import androidx.viewpager2.widget.MarginPageTransformer
 import com.sevenzeroes.trekkieapp.R
 import com.sevenzeroes.trekkieapp.core.ui.helpers.MainViewPagerAdapter
 import com.sevenzeroes.trekkieapp.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity()  {
 
     private var _binding: ActivityMainBinding? = null
@@ -23,8 +27,10 @@ class MainActivity : AppCompatActivity()  {
     }
 
     private fun setupViewPager(){
-        binding.vpMain.adapter = MainViewPagerAdapter(this)
-        binding.vpMain.isUserInputEnabled = false
+        binding.vpMain.apply {
+           adapter = MainViewPagerAdapter(this@MainActivity)
+           isUserInputEnabled = false
+        }
     }
 
     private fun initBnvListener() {

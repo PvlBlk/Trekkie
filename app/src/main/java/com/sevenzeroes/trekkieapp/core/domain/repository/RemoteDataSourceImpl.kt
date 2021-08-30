@@ -6,11 +6,12 @@ import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.domain.models.StapiResponse
 import com.sevenzeroes.trekkieapp.core.domain.models.TmdbResponse
 import com.sevenzeroes.trekkieapp.core.helpers.TimeUtils
+import javax.inject.Inject
 
-class RemoteDataSourceImpl : RemoteDataSource {
+class RemoteDataSourceImpl @Inject constructor() : RemoteDataSource {
 
-    var stapi = NetworkService.stapiRetrofitService()
-    var movieApi = NetworkService.tmdbRetrofitService()
+    var stapi = NetworkService.stapiRetrofitService() //fixme inject
+    var movieApi = NetworkService.tmdbRetrofitService()//fixme inject
 
     override suspend fun getSummaries(title: String?) : MutableList<EpisodeSummary> {
         val stapiResponse = searchEpisodesByTitle(title)

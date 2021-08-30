@@ -1,24 +1,20 @@
 package com.sevenzeroes.trekkieapp.core.domain.repository
 
-import com.sevenzeroes.trekkieapp.core.domain.models.TmdbResponse
 import com.sevenzeroes.trekkieapp.core.domain.models.EpisodeSummary
 import com.sevenzeroes.trekkieapp.core.domain.models.StapiResponse
-import retrofit2.Response
+import com.sevenzeroes.trekkieapp.core.domain.models.TmdbResponse
 
-class EpisodesRepository(private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource) {
+interface EpisodesRepository {
 
-   suspend fun  getSummaries(query: String?)
-   : MutableList<EpisodeSummary> = remoteDataSource.getSummaries(query)
+    suspend fun getSummaries(query: String?): MutableList<EpisodeSummary>
 
-   suspend fun  getEpisodeSpecifics(seasonNumber: Int, episodeNumber: Int)
-   : TmdbResponse = remoteDataSource.getEpisodeSpecifics(seasonNumber, episodeNumber)
+    suspend fun getEpisodeSpecifics(seasonNumber: Int, episodeNumber: Int): TmdbResponse
 
-   suspend fun  searchEpisodesByTitle(title: String?)
-   : StapiResponse = remoteDataSource.searchEpisodesByTitle(title)
+    suspend fun searchEpisodesByTitle(title: String?): StapiResponse
 
-   suspend fun searchEpisodesInDb(title: String?) = localDataSource.searchEpisodesInDb(title)
+    suspend fun searchEpisodesInDb(title: String?): MutableList<EpisodeSummary>
 
-   suspend fun getAllEpisodesFromDb() = localDataSource.getAllEpisodesFromDb()
+    suspend fun getAllEpisodesFromDb(): MutableList<EpisodeSummary>
 
-   suspend fun insert(vararg episodes: EpisodeSummary) = localDataSource.insert(*episodes)
+    suspend fun insert(vararg episodes: EpisodeSummary)
 }
