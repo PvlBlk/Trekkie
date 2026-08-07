@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity()  {
     }
 
     private fun initBnvListener() {
-        binding.bnvMain.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bnvMain.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.bnvListItem -> openList()
                 R.id.bnvFavouriteItem -> openFavourites()

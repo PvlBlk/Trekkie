@@ -16,9 +16,7 @@ import com.sevenzeroes.trekkieapp.core.ui.helpers.EpisodesAdapter
 import com.sevenzeroes.trekkieapp.core.ui.viewModels.FavouritesViewModel
 import com.sevenzeroes.trekkieapp.databinding.FavouritesFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import es.dmoral.toasty.Toasty
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint

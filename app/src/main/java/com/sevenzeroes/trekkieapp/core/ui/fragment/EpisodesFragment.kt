@@ -19,8 +19,6 @@ import com.sevenzeroes.trekkieapp.core.ui.helpers.EpisodesAdapter
 import com.sevenzeroes.trekkieapp.core.ui.viewModels.EpisodesViewModel
 import com.sevenzeroes.trekkieapp.databinding.EpisodesFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import es.dmoral.toasty.Toasty
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
